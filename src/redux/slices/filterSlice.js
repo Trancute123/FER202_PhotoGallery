@@ -1,16 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  category: "All",
+  searchTerm: "",
+};
+
 const filterSlice = createSlice({
   name: "filter",
-  initialState: {
-    category: "All",
-    searchTerm: "",
-  },
+  initialState,
   reducers: {
-    setCategory(state, action) {
+    setCategory: (state, action) => {
       state.category = action.payload;
     },
-    setSearchTerm(state, action) {
+    setSearchTerm: (state, action) => {
       state.searchTerm = action.payload;
     },
   },
