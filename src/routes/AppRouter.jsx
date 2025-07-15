@@ -1,21 +1,18 @@
+// src/routes/AppRouter.jsx
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "../components/layout/MainLayout";
 import HomePage from "../pages/HomePage";
 import FavoritesPage from "../pages/FavoritesPage";
 
-const AppRouter = () => {
-  return (
-    <Router>
-      <MainLayout>
-        <Routes>
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/favorites" element={<FavoritesPage />} />
-          <Route path="/" element={<Navigate to="/home" />} />
-        </Routes>
-      </MainLayout>
-    </Router>
-  );
-};
+const AppRouter = () => (
+  <Routes>
+    <Route path="/" element={<MainLayout />}>
+      <Route index element={<Navigate to="/home" />} />
+      <Route path="home" element={<HomePage />} />
+      <Route path="favorites" element={<FavoritesPage />} />
+    </Route>
+  </Routes>
+);
 
 export default AppRouter;
