@@ -1,18 +1,15 @@
-// src/routes/AppRouter.jsx
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
-import MainLayout from "../components/layout/MainLayout";
-import HomePage from "../pages/HomePage";
+import { Routes, Route } from "react-router-dom";
+import GalleryPage from "../pages/GalleryPage";
+import FilterPage from "../pages/FilterPage";
 import FavoritesPage from "../pages/FavoritesPage";
 
-const AppRouter = () => (
-  <Routes>
-    <Route path="/" element={<MainLayout />}>
-      <Route index element={<Navigate to="/home" />} />
-      <Route path="home" element={<HomePage />} />
-      <Route path="favorites" element={<FavoritesPage />} />
-    </Route>
-  </Routes>
-);
-
-export default AppRouter;
+export default function AppRouter() {
+  return (
+    <Routes>
+      <Route path="/" element={<GalleryPage />} />
+      <Route path="/filter" element={<FilterPage />} />
+      <Route path="/favorites" element={<FavoritesPage />} />
+    </Routes>
+  );
+}
