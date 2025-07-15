@@ -3,14 +3,9 @@ const images = [
     id: 1,
     name: "Sunset Beach",
     url: "/images/sunset.jpg",
-    category: "Travel",
+    category: "Nature",
   },
-  {
-    id: 2,
-    name: "Cute Puppy",
-    url: "/images/puppy.jpg",
-    category: "Pet",
-  },
+  { id: 2, name: "Cute Puppy", url: "/images/puppy.jpg", category: "Animals" },
   {
     id: 3,
     name: "Mountain View",
@@ -19,7 +14,7 @@ const images = [
   },
   {
     id: 4,
-    name: "Mountain",
+    name: "Mirror Lake",
     url: "/images/switzerland1.jpg",
     category: "Nature",
   },
@@ -27,11 +22,11 @@ const images = [
     id: 5,
     name: "Village View",
     url: "/images/switzerland2.jpg",
-    category: "Switzerland",
+    category: "City",
   },
   {
     id: 6,
-    name: "Mountain",
+    name: "Alpine Blue",
     url: "/images/switzerland3.jpg",
     category: "Nature",
   },
@@ -39,7 +34,25 @@ const images = [
     id: 7,
     name: "Switzerland Village",
     url: "/images/switzerland4.jpg",
-    category: "Switzerland",
+    category: "City",
+  },
+  {
+    id: 8,
+    name: "Sunrise Lake",
+    url: "/images/sunset.jpg",
+    category: "Nature",
+  },
+  {
+    id: 9,
+    name: "Snowy Mountains",
+    url: "/images/mountain.jpg",
+    category: "Nature",
+  },
+  {
+    id: 10,
+    name: "Puppy Smile",
+    url: "/images/puppy.jpg",
+    category: "Animals",
   },
 ];
 
