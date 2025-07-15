@@ -1,13 +1,12 @@
 import React from "react";
-import images from "./data/images";
-import Gallery from "./components/Gallery";
+import { BrowserRouter as Router } from "react-router-dom";
+import AppRouter from "./routes/AppRouter";
 
 function App() {
   return (
-    <div className="App">
-      <h1>📸 Photo Gallery</h1>
-      <Gallery images={images} />
-    </div>
+    <Router>
+      <AppRouter />
+    </Router>
   );
 }
 
