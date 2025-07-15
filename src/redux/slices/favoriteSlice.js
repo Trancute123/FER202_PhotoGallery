@@ -1,18 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const favoriteSlice = createSlice({
-  name: 'favorites',
-  initialState: [],
+  name: "favorite",
+  initialState: { favorites: [] },
   reducers: {
-    toggleFavorite: (state, action) => {
-      const exists = state.find(photo => photo.id === action.payload.id);
-      if (exists) {
-        return state.filter(photo => photo.id !== action.payload.id);
+    toggleFavorite(state, action) {
+      const id = action.payload;
+      if (state.favorites.includes(id)) {
+        state.favorites = state.favorites.filter((fav) => fav !== id);
       } else {
-        state.push(action.payload);
+        state.favorites.push(id);
       }
-    }
-  }
+    },
+  },
 });
 
 export const { toggleFavorite } = favoriteSlice.actions;
