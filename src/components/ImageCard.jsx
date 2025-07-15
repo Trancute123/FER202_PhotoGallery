@@ -4,6 +4,7 @@ import {
   addToFavorites,
   removeFromFavorites,
 } from "../redux/slices/favoriteSlice";
+import { openModal } from "../redux/slices/modalSlice"; // ✅ Thêm dòng này
 
 export default function ImageCard({ img }) {
   const dispatch = useDispatch();
@@ -16,6 +17,10 @@ export default function ImageCard({ img }) {
 
   const handleUnlike = () => {
     dispatch(removeFromFavorites(img));
+  };
+
+  const handleOpenModal = () => {
+    dispatch(openModal(img)); // ✅ Gửi action mở modal
   };
 
   return (
@@ -32,6 +37,7 @@ export default function ImageCard({ img }) {
         flexDirection: "column",
         justifyContent: "space-between",
         height: "auto",
+        cursor: "pointer", // ✅ Cho hiệu ứng click ảnh
       }}
     >
       <img
@@ -44,6 +50,7 @@ export default function ImageCard({ img }) {
           borderTopLeftRadius: "12px",
           borderTopRightRadius: "12px",
         }}
+        onClick={handleOpenModal} // ✅ Click ảnh mở modal
       />
 
       <div style={{ textAlign: "center", marginTop: "10px" }}>
