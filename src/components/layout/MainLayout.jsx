@@ -4,9 +4,8 @@ import { Link, Outlet } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaSearch } from "react-icons/fa";
 
-const MainLayout = ({ children }) => {
+const MainLayout = () => {
   const [showMenu, setShowMenu] = useState(false);
-
   const toggleMenu = () => setShowMenu(!showMenu);
 
   const menuItemStyle = {
@@ -14,7 +13,7 @@ const MainLayout = ({ children }) => {
   };
 
   const handleMouseOver = (e) => {
-    e.target.style.backgroundColor = '#f0f0f0'; // Màu xám sáng hơn
+    e.target.style.backgroundColor = '#f0f0f0';
   };
 
   const handleMouseOut = (e) => {
@@ -28,16 +27,19 @@ const MainLayout = ({ children }) => {
           className="d-flex align-items-center justify-content-between w-100 m-0 px-0"
           style={{ height: '80px' }}
         >
+          {/* Logo + Title */}
           <div className="d-flex align-items-center ps-0" style={{ height: '100%' }}>
             <Link to="/home" className="d-flex align-items-center text-decoration-none text-dark" style={{ height: '100%' }}>
               <img
                 src="https://static.topcv.vn/company_logos/DFtAiouYgEptwb56ISZeWgbcXgmxnLfm_1650885574____64525bcbe563d4a7599cc12cc508db75.png"
                 alt="F88 Logo"
-                style={{ height: '100%', width: 'auto', objectFit: 'contain' }}
+                style={{ maxHeight: '48px', width: 'auto', objectFit: 'contain' }}
               />
               <h1 className="h4 m-0 ms-2">Photo Gallery</h1>
             </Link>
           </div>
+
+          {/* Search + Avatar */}
           <div className="d-flex align-items-center gap-3 flex-grow-1 justify-content-end pe-3">
             <div className="input-group me-3" style={{ width: '500px' }}>
               <input
@@ -49,6 +51,7 @@ const MainLayout = ({ children }) => {
                 <FaSearch />
               </button>
             </div>
+
             <div className="position-relative">
               <img
                 src="/images/avatar/OIP.webp"
@@ -90,8 +93,10 @@ const MainLayout = ({ children }) => {
           </div>
         </div>
       </header>
+
+      {/* Nội dung các page */}
       <main className="container py-4">
-        {children}
+        <Outlet />
       </main>
     </div>
   );
