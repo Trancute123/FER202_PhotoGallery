@@ -1,17 +1,15 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleFavorite } from '../redux/slices/favoriteSlice';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleFavorite } from "../redux/slices/favoriteSlice";
 
-export default function FavoriteButton({ photo }) {
+export default function FavoriteButton({ id }) {
   const dispatch = useDispatch();
-  const favorites = useSelector(state => state.favorites);
-  const isFavorite = favorites.some(fav => fav.id === photo.id);
+  const favorites = useSelector((state) => state.favorite.favorites);
+  const isFavorite = favorites.includes(id);
 
   return (
-    <button
-      className={`btn ${isFavorite ? 'btn-danger' : 'btn-outline-danger'} btn-sm mt-2`}
-      onClick={() => dispatch(toggleFavorite(photo))}
-    >
-      {isFavorite ? '💖 Đã thích' : '🤍 Yêu thích'}
+    <button onClick={() => dispatch(toggleFavorite(id))}>
+      {isFavorite ? "♥" : "♡"}
     </button>
   );
 }
