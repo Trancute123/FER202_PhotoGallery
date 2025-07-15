@@ -1,3 +1,4 @@
+// redux/slices/modalSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const modalSlice = createSlice({
@@ -9,7 +10,7 @@ const modalSlice = createSlice({
   reducers: {
     openModal: (state, action) => {
       state.isOpen = true;
-      state.image = action.payload; 
+      state.image = action.payload;
     },
     closeModal: (state) => {
       state.isOpen = false;
