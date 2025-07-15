@@ -1,4 +1,3 @@
-// src/pages/FavoritesPage.jsx
 import React from "react";
 import { useSelector } from "react-redux";
 import Gallery from "../components/Gallery";

@@ -5,6 +5,7 @@ import SearchBar from "../components/SearchBar";
 import CategoryFilter from "../components/CategoryFilter";
 import images from "../data/images";
 import Gallery from "../components/Gallery";
+import ImageModal from "../components/ImageModal";
 
 export default function FilterPage() {
   const { category, searchTerm } = useSelector((state) => state.filter);
@@ -23,6 +24,7 @@ export default function FilterPage() {
       <SearchBar />
       <CategoryFilter />
       <Gallery images={filteredImages} />
+      <ImageModal />
     </>
   );
 }

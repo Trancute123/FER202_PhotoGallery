@@ -6,27 +6,25 @@ export default function ImageModal() {
   const dispatch = useDispatch();
   const { isOpen, image } = useSelector((state) => state.modal);
 
-  if (!isOpen) return null;
+  if (!isOpen || !image) return null; // 💥 nếu chưa mở hoặc chưa có ảnh thì không hiển thị
 
   return (
     <div
-      className="modal-overlay"
       onClick={() => dispatch(closeModal())}
       style={{
         position: "fixed",
         top: 0, left: 0, right: 0, bottom: 0,
-        backgroundColor: "rgba(0,0,0,0.5)",
+        backgroundColor: "rgba(0,0,0,0.7)",
         display: "flex", justifyContent: "center", alignItems: "center",
         zIndex: 1000,
       }}
     >
       <div
-        className="modal-content"
         onClick={(e) => e.stopPropagation()}
         style={{
           background: "#fff",
-          padding: "20px",
-          borderRadius: "8px",
+          padding: 20,
+          borderRadius: 8,
           maxWidth: "90vw",
           maxHeight: "90vh",
           overflow: "auto",
@@ -37,7 +35,7 @@ export default function ImageModal() {
           alt={image.name}
           style={{ width: "100%", maxHeight: "70vh", objectFit: "contain" }}
         />
-        <p style={{ marginTop: "10px", textAlign: "center" }}>{image.name}</p>
+        <p style={{ marginTop: 10, textAlign: "center" }}>{image.name}</p>
       </div>
     </div>
   );
