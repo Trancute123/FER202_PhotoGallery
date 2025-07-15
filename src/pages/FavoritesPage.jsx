@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Header from "../components/layout/Header";
-import Gallery from "../components/Gallery";
+import Gallery from "../components/Gallery.jsx";
 import images from "../data/images";
 
 export default function FavoritesPage() {
