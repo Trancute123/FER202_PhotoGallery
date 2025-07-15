@@ -1,0 +1,45 @@
+/* index.css */
+
+/* Đảm bảo nền bao phủ toàn bộ trang */
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #ffe3ec, #ffdde1); /* pastel hồng dễ thương */
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* Link mặc định */
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #5c1a33;
+  margin: 0 10px;
+  transition: 0.3s;
+}
+
+a:hover {
+  color: #ff4081;
+  text-shadow: 0px 0px 6px rgba(255, 64, 129, 0.6);
+}
+
+/* Thanh điều hướng (nếu bạn có dùng <nav>) */
+nav {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 15px;
+  border-bottom: 2px solid #ccc;
+  text-align: center;
+  border-radius: 0 0 15px 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Scrollbar tuỳ chỉnh */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #ff82a9;
+  border-radius: 10px;
+}
