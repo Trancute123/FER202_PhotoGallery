@@ -1,22 +1,18 @@
-// src/redux/slices/modalSlice.js
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const modalSlice = createSlice({
-  name: 'modal',
-  initialState: {
-    isOpen: false,
-    selectedImage: null
-  },
+  name: "modal",
+  initialState: { isOpen: false, image: null },
   reducers: {
-    openModal: (state, action) => {
+    openModal(state, action) {
       state.isOpen = true;
-      state.selectedImage = action.payload; // payload = ảnh được chọn
+      state.image = action.payload;
     },
-    closeModal: (state) => {
+    closeModal(state) {
       state.isOpen = false;
-      state.selectedImage = null;
-    }
-  }
+      state.image = null;
+    },
+  },
 });
 
 export const { openModal, closeModal } = modalSlice.actions;
