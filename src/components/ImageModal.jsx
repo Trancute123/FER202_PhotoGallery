@@ -20,7 +20,7 @@ export default function ImageModal() {
         zIndex: 1000,
       }}
     >
-      <div
+      <di
         className="modal-content"
         onClick={(e) => e.stopPropagation()}
         style={{
@@ -38,7 +38,7 @@ export default function ImageModal() {
           style={{ width: "100%", maxHeight: "70vh", objectFit: "contain" }}
         />
         <p style={{ marginTop: "10px", textAlign: "center" }}>{image.name}</p>
-      </div>
+      </di>
     </div>
   );
 }
