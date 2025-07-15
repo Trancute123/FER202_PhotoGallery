@@ -9,4 +9,8 @@ root.render(
   <Provider store={store}>
     <App />
   </Provider>
+<<<<<<< HEAD
 );
+=======
+);
+>>>>>>> origin/main
