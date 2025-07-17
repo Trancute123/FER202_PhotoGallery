@@ -1,18 +1,21 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import Gallery from "../components/Gallery";
 import Header from "../components/layout/Header";
-import Gallery from "../components/Gallery.jsx";
-import images from "../data/images";
 
 export default function FavoritesPage() {
-  const favorites = useSelector((state) => state.favorite.favorites);
-  const favoriteImages = images.filter((img) => favorites.includes(img.id));
+  const favorites = useSelector((state) => state.favorite);
 
   return (
     <>
       <Header />
-      <h2 style={{ textAlign: "center" }}>Your Favorite Images</h2>
-      <Gallery images={favoriteImages} />
+      {favorites.length === 0 ? (
+        <p style={{ padding: "20px", textAlign: "center" }}>
+          You haven't liked any images yet.
+        </p>
+      ) : (
+        <Gallery images={favorites} />
+      )}
     </>
   );
 }
