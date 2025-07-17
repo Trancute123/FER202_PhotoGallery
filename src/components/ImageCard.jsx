@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToFavorites,
   removeFromFavorites,
 } from "../redux/slices/favoriteSlice";
-import { openModal } from "../redux/slices/modalSlice"; // ✅ Thêm dòng này
+import { openModal } from "../redux/slices/modalSlice";
 
 export default function ImageCard({ img }) {
+  const [comment, setComment] = useState(""); // State cho comment
+  const [comments, setComments] = useState([]); // State lưu danh sách comment
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorite);
   const isFavorite = favorites.some((item) => item.id === img.id);
+
+  // Xử lý việc thêm comment vào local state
+  const handleAddComment = () => {
+    if (comment.trim() === "") return;
+
+    setComments([...comments, { text: comment, createdAt: new Date() }]);
+    setComment(""); // Reset input comment
+  };
 
   const handleLike = () => {
     dispatch(addToFavorites(img));
@@ -20,7 +30,7 @@ export default function ImageCard({ img }) {
   };
 
   const handleOpenModal = () => {
-    dispatch(openModal(img)); // ✅ Gửi action mở modal
+    dispatch(openModal(img));
   };
 
   return (
@@ -37,7 +47,7 @@ export default function ImageCard({ img }) {
         flexDirection: "column",
         justifyContent: "space-between",
         height: "auto",
-        cursor: "pointer", // ✅ Cho hiệu ứng click ảnh
+        cursor: "pointer",
       }}
     >
       <img
@@ -50,7 +60,7 @@ export default function ImageCard({ img }) {
           borderTopLeftRadius: "12px",
           borderTopRightRadius: "12px",
         }}
-        onClick={handleOpenModal} // ✅ Click ảnh mở modal
+        onClick={handleOpenModal}
       />
 
       <div style={{ textAlign: "center", marginTop: "10px" }}>
@@ -114,6 +124,48 @@ export default function ImageCard({ img }) {
             💔 Unlike
           </button>
         )}
+      </div>
+
+      <div className="comments-section" style={{ marginTop: "20px" }}>
+        <h3>Comments</h3>
+        <textarea
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          placeholder="Write your comment..."
+          style={{
+            width: "100%",
+            padding: "8px",
+            borderRadius: "8px",
+            marginBottom: "10px",
+          }}
+        ></textarea>
+        <button
+          onClick={handleAddComment}
+          style={{
+            backgroundColor: "#20a829ff",
+            color: "#fff",
+            padding: "8px 12px",
+            borderRadius: "8px",
+            border: "none",
+            cursor: "pointer",
+          }}
+        >
+          Comment
+        </button>
+        <div className="comments-list" style={{ marginTop: "15px" }}>
+          {comments.map((comment, index) => (
+            <div
+              key={index}
+              className="comment-item"
+              style={{ marginBottom: "10px" }}
+            >
+              <p>{comment.text}</p>
+              <span style={{ fontSize: "12px", color: "#777" }}>
+                {new Date(comment.createdAt).toLocaleString()}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
