@@ -15,7 +15,7 @@ const Header = () => {
       }}
     >
       <NavLink
-        to="/"
+        to="/gallery"
         style={({ isActive }) => ({
           color: isActive ? "#fff" : "#f0f0f0",
           fontWeight: "bold",
