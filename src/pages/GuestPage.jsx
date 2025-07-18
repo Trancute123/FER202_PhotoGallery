@@ -95,7 +95,7 @@ const GuestPage = () => {
             Giới thiệu
           </span>
           <span style={styles.navButton} onClick={() => navigate("/create")}>
-            Tạo
+            Tin tức
           </span>
           {isAuthenticated ? (
             <span style={styles.navButtonOutline} onClick={handleLogout}>
