@@ -78,7 +78,7 @@ export default function ImageCard({ img }) {
             style={{
               backgroundColor: "#ff6b81",
               color: "#fff",
-              padding: "8px 12px", // Đảm bảo padding không bị trùng lặp
+              padding: "8px 1 2px", // Đảm bảo padding không bị trùng lặp
               borderRadius: "8px",
               border: "none",
               cursor: "pointer",

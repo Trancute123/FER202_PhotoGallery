@@ -8,7 +8,7 @@ const store = configureStore({
   reducer: {
     auth: authReducer,
     filter: filterReducer,
-    modal: modalReducer, 
+    modal: modalReducer,
     favorite: favoriteReducer,
   },
 });
