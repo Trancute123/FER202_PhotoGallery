@@ -36,85 +36,6 @@ const styles = {
     fontSize: "14px",
     cursor: "pointer",
   },
-  content: { display: "flex", height: "calc(100vh - 60px)" },
-  leftSide: {
-    flex: 1,
-    backgroundImage: "url('/images/sunset.jpg')",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    position: "relative",
-  },
-  overlay: {
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  slogan: {
-    color: "white",
-    fontSize: "48px",
-    fontWeight: "bold",
-    textAlign: "center",
-    lineHeight: "1.2",
-  },
-  rightSide: {
-    flex: 1,
-    backgroundColor: "#ffe0e9",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "0 40px",
-  },
-  welcome: {
-    fontSize: "20px",
-    color: "#d6336c",
-    marginBottom: "20px",
-    fontWeight: "bold",
-  },
-  label: {
-    alignSelf: "flex-start",
-    marginLeft: "calc(50% - 150px)",
-    fontSize: "14px",
-    color: "#333",
-    marginTop: "10px",
-    marginBottom: "5px",
-  },
-  input: {
-    width: "100%",
-    maxWidth: "300px",
-    padding: "12px",
-    border: "1px solid #ccc",
-    borderRadius: "8px",
-    fontSize: "14px",
-    marginBottom: "10px",
-  },
-  loginButton: {
-    width: "100%",
-    maxWidth: "300px",
-    padding: "12px",
-    backgroundColor: "#ff69b4",
-    color: "white",
-    border: "none",
-    borderRadius: "8px",
-    fontWeight: "bold",
-    fontSize: "14px",
-    cursor: "pointer",
-    marginBottom: "10px",
-  },
-  signupButton: {
-    width: "100%",
-    maxWidth: "300px",
-    padding: "12px",
-    backgroundColor: "#fff",
-    color: "#d6336c",
-    border: "2px solid #d6336c",
-    borderRadius: "8px",
-    fontWeight: "bold",
-    fontSize: "14px",
-    cursor: "pointer",
-  },
 };
 
 const GuestPage = () => {
@@ -193,44 +114,139 @@ const GuestPage = () => {
         </div>
       </div>
 
-      <div style={styles.content}>
-        <div style={styles.leftSide}>
-          <div style={styles.overlay}>
-            <h1 style={styles.slogan}>
-              Khơi nguồn
-              <br />ý tưởng
-            </h1>
-          </div>
+      <div
+        style={{ display: "flex", height: "100vh", fontFamily: "system-ui" }}
+      >
+        <div
+          style={{
+            flex: 1,
+            backgroundImage: "url('/images/sunset.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            animation: "slideInLeft 1s ease",
+          }}
+        >
+          <h1
+            style={{
+              color: "#fff",
+              fontSize: "52px",
+              fontWeight: "bold",
+              textShadow: "2px 2px 8px rgba(0,0,0,0.6)",
+              animation: "fadeIn 2s ease",
+              lineHeight: "1.2",
+            }}
+          >
+            Khơi nguồn <br /> ý tưởng
+          </h1>
         </div>
 
-        <div style={styles.rightSide}>
-          <h2 style={styles.welcome}>Chào mừng bạn đến với PinkPin</h2>
-          <label style={styles.label}>Email</label>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            style={styles.input}
-          />
-          <label style={styles.label}>Mật khẩu</label>
-          <input
-            type="password"
-            placeholder="Mật khẩu"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={styles.input}
-          />
-          <button onClick={handleLogin} style={styles.loginButton}>
-            Đăng nhập
-          </button>
-          <button onClick={handleSignup} style={styles.signupButton}>
-            Đăng ký
-          </button>
+        <div
+          style={{
+            flex: 1,
+            backgroundColor: "#ffe0e9",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            animation: "slideInRight 1s ease",
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: "white",
+              padding: "40px",
+              borderRadius: "20px",
+              boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+              width: "100%",
+              maxWidth: "400px",
+              animation: "fadeInUp 1.2s ease",
+            }}
+          >
+            <h2
+              style={{
+                color: "#d6336c",
+                textAlign: "center",
+                marginBottom: 30,
+              }}
+            >
+              Chào mừng bạn đến với <b>PinkPin</b>
+            </h2>
+            <label style={{ fontWeight: "bold", color: "#333" }}>Email</label>
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              style={{
+                width: "100%",
+                padding: "12px",
+                marginBottom: "15px",
+                borderRadius: "10px",
+                border: "1px solid #ccc",
+                backgroundColor: "#f0f5ff",
+                transition: "all 0.3s ease",
+              }}
+            />
+            <label style={{ fontWeight: "bold", color: "#333" }}>
+              Mật khẩu
+            </label>
+            <input
+              type="password"
+              placeholder="Mật khẩu"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              style={{
+                width: "100%",
+                padding: "12px",
+                marginBottom: "20px",
+                borderRadius: "10px",
+                border: "1px solid #ccc",
+                backgroundColor: "#f0f5ff",
+                transition: "all 0.3s ease",
+              }}
+            />
+            <button
+              onClick={handleLogin}
+              style={{
+                width: "100%",
+                padding: "12px",
+                backgroundColor: "#ff69b4",
+                border: "none",
+                borderRadius: "999px",
+                color: "white",
+                fontWeight: "bold",
+                fontSize: "16px",
+                cursor: "pointer",
+                marginBottom: "12px",
+                transition: "all 0.3s ease",
+              }}
+            >
+              Đăng nhập
+            </button>
+            <button
+              onClick={handleSignup}
+              style={{
+                width: "100%",
+                padding: "12px",
+                backgroundColor: "white",
+                border: "2px solid #d6336c",
+                borderRadius: "999px",
+                color: "#d6336c",
+                fontWeight: "bold",
+                fontSize: "16px",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+              }}
+            >
+              Đăng ký
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Explore section */}
+      {/* Giới thiệu section */}
       <div
         ref={exploreRef}
         style={{
@@ -287,7 +303,7 @@ const GuestPage = () => {
         </div>
       </div>
 
-      {/* Image Collage section */}
+      {/* Khám phá section */}
       <div
         ref={introduceRef}
         style={{
