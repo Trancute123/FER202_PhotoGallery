@@ -4,12 +4,19 @@ import { useSelector } from "react-redux";
 import SearchBar from "../components/SearchBar.jsx";
 import CategoryFilter from "../components/CategoryFilter.jsx";
 import Gallery from "../components/Gallery.jsx";
-import images from "../data/images";
+import UploadImage from "../components/UploadImage";
+
+// Nếu bạn có file ảnh mẫu, import ở đây:
+import sampleImages from "../data/images"; // Nếu có file này
 
 export default function GalleryPage() {
   const { category, searchTerm } = useSelector((state) => state.filter);
   const navigate = useNavigate();
   const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+  // Lấy ảnh upload từ Redux
+  const imagesFromRedux = useSelector((state) => state.image) || [];
+  // Gộp ảnh mẫu và ảnh upload
+  const allImages = [...(sampleImages || []), ...imagesFromRedux];
 
   const handleLogout = () => {
     localStorage.removeItem("isAuthenticated");
@@ -17,7 +24,8 @@ export default function GalleryPage() {
     navigate("/"); // Quay lại trang GuestPage
   };
 
-  const filteredImages = images.filter((img) => {
+  const filteredImages = allImages.filter((img) => {
+    if (!img.name) return false;
     const matchCategory = category === "All" || img.category === category;
     const matchSearch = img.name
       .toLowerCase()
@@ -63,6 +71,7 @@ export default function GalleryPage() {
       {/* Nội dung chính */}
       <SearchBar />
       <CategoryFilter />
+      <UploadImage />
       <Gallery images={filteredImages} />
     </>
   );
