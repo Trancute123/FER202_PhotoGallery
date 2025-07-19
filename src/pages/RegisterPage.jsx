@@ -12,25 +12,25 @@ const GuestPage = () => {
     setIsAuthenticated(auth);
   }, []);
 
-  const handleLogin = () => {
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    const user = users.find(
-      (u) => u.email === email && u.password === password
-    );
-
-    if (user) {
-      localStorage.setItem("isAuthenticated", true);
-      localStorage.setItem("user", JSON.stringify(user));
-      navigate("/gallery");
-    } else {
-      alert(
-        "Email hoặc mật khẩu sai, hoặc tài khoản chưa tồn tại.\nVui lòng đăng ký."
-      );
-    }
-  };
 
   const handleSignup = () => {
-    navigate("/register");
+    if (!email || !password) {
+      alert("Vui lòng nhập đầy đủ thông tin");
+      return;
+    }
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    const exists = users.some(u => u.email === email);
+    if (exists) {
+      alert("Email đã tồn tại!");
+      return;
+    }
+
+    users.push({ email, password });
+    localStorage.setItem("users", JSON.stringify(users));
+    alert("Đăng ký thành công! Hãy đăng nhập.");
+    navigate("/");
   };
 
   const handleLogout = () => {
@@ -100,9 +100,7 @@ const GuestPage = () => {
             onChange={(e) => setPassword(e.target.value)}
             style={styles.input}
           />
-          <button onClick={handleLogin} style={styles.loginButton}>
-            Đăng nhập
-          </button>
+
           <button onClick={handleSignup} style={styles.signupButton}>
             Đăng ký
           </button>
