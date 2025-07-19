@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import SearchBar from "../components/SearchBar.jsx";
 import CategoryFilter from "../components/CategoryFilter.jsx";
 import Gallery from "../components/Gallery.jsx";
-import UploadImage from "../components/UploadImage";
 
 // Nếu bạn có file ảnh mẫu, import ở đây:
 import sampleImages from "../data/images"; // Nếu có file này
@@ -71,7 +70,7 @@ export default function GalleryPage() {
       {/* Nội dung chính */}
       <SearchBar />
       <CategoryFilter />
-      <UploadImage />
+
       <Gallery images={filteredImages} />
     </>
   );
