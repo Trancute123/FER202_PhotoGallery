@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect  } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 const styles = {
@@ -45,19 +45,6 @@ const GuestPage = () => {
   const introduceRef = useRef(null);
   const exploreRef = useRef(null);
 
-useEffect(() => {
-    // Chạy khi component mount lần đầu
-    const existingUsers = JSON.parse(localStorage.getItem("users"));
-    if (!existingUsers || existingUsers.length === 0) {
-      const mockUsers = [
-        { email: "user1@example.com", password: "123456" },
-        { email: "user2@pinkpin.com", password: "pinkpin" }
-      ];
-      localStorage.setItem("users", JSON.stringify(mockUsers));
-      console.log("Mock users đã được thêm vào localStorage.");
-    }
-  }, []);
-
   const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
 
   const handleLogin = () => {
@@ -98,7 +85,7 @@ useEffect(() => {
 
   return (
     <div style={styles.wrapper}>
-      <div style={styles.navbar}>        {/*chú thích: Navbar */}
+      <div style={styles.navbar}>
         <div style={styles.logo}>PinkPin</div>
         <div style={styles.navItems}>
           <span style={styles.navButton} onClick={scrollToIntroduce}>
@@ -106,9 +93,6 @@ useEffect(() => {
           </span>
           <span style={styles.navButton} onClick={scrollToExplore}>
             Giới thiệu
-          </span>
-          <span style={styles.navButton} onClick={() => navigate("/create")}>
-            Tin tức
           </span>
           {isAuthenticated ? (
             <span style={styles.navButtonOutline} onClick={handleLogout}>
@@ -127,6 +111,7 @@ useEffect(() => {
         </div>
       </div>
 
+      {/* Màn hình chào mừng + login */}
       <div
         style={{ display: "flex", height: "100vh", fontFamily: "system-ui" }}
       >
@@ -199,7 +184,6 @@ useEffect(() => {
                 borderRadius: "10px",
                 border: "1px solid #ccc",
                 backgroundColor: "#f0f5ff",
-                transition: "all 0.3s ease",
               }}
             />
             <label style={{ fontWeight: "bold", color: "#333" }}>
@@ -217,7 +201,6 @@ useEffect(() => {
                 borderRadius: "10px",
                 border: "1px solid #ccc",
                 backgroundColor: "#f0f5ff",
-                transition: "all 0.3s ease",
               }}
             />
             <button
@@ -233,7 +216,6 @@ useEffect(() => {
                 fontSize: "16px",
                 cursor: "pointer",
                 marginBottom: "12px",
-                transition: "all 0.3s ease",
               }}
             >
               Đăng nhập
@@ -250,7 +232,6 @@ useEffect(() => {
                 fontWeight: "bold",
                 fontSize: "16px",
                 cursor: "pointer",
-                transition: "all 0.3s ease",
               }}
             >
               Đăng ký
