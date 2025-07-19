@@ -4,17 +4,14 @@ import { useSelector } from "react-redux";
 import SearchBar from "../components/SearchBar.jsx";
 import CategoryFilter from "../components/CategoryFilter.jsx";
 import Gallery from "../components/Gallery.jsx";
-
-// Nếu bạn có file ảnh mẫu, import ở đây:
 import sampleImages from "../data/images"; // Nếu có file này
 
 export default function GalleryPage() {
   const { category, searchTerm } = useSelector((state) => state.filter);
   const navigate = useNavigate();
   const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
-  // Lấy ảnh upload từ Redux
+
   const imagesFromRedux = useSelector((state) => state.image) || [];
-  // Gộp ảnh mẫu và ảnh upload
   const allImages = [...(sampleImages || []), ...imagesFromRedux];
 
   const handleLogout = () => {
@@ -34,35 +31,20 @@ export default function GalleryPage() {
 
   return (
     <>
-      {/* Navbar Hồng */}
+      {/* Navbar Hồng - Đã sửa chỉ còn 3 nút: Tạo, Favorites, Đăng xuất */}
       <div style={styles.navbar}>
         <div style={styles.logo}>PinkPin</div>
         <div style={styles.navItems}>
-          <span style={styles.navButton} onClick={() => navigate("/gallery")}>
-            Khám phá
-          </span>
-          <span style={styles.navButton} onClick={() => navigate("/about")}>
-            Giới thiệu
-          </span>
           <span style={styles.navButton} onClick={() => navigate("/create")}>
             Tạo
           </span>
-          {isAuthenticated ? (
+          <span style={styles.navButton} onClick={() => navigate("/favorites")}>
+            Favorites
+          </span>
+          {isAuthenticated && (
             <span style={styles.navButtonOutline} onClick={handleLogout}>
               Đăng xuất
             </span>
-          ) : (
-            <>
-              <span style={styles.navButton} onClick={() => navigate("/")}>
-                Đăng nhập
-              </span>
-              <span
-                style={styles.navButtonOutline}
-                onClick={() => navigate("/register")}
-              >
-                Đăng ký
-              </span>
-            </>
           )}
         </div>
       </div>
@@ -70,7 +52,6 @@ export default function GalleryPage() {
       {/* Nội dung chính */}
       <SearchBar />
       <CategoryFilter />
-
       <Gallery images={filteredImages} />
     </>
   );
