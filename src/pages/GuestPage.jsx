@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect  } from "react";
 import { useNavigate } from "react-router-dom";
 
 const styles = {
@@ -45,6 +45,19 @@ const GuestPage = () => {
   const introduceRef = useRef(null);
   const exploreRef = useRef(null);
 
+useEffect(() => {
+    // Chạy khi component mount lần đầu
+    const existingUsers = JSON.parse(localStorage.getItem("users"));
+    if (!existingUsers || existingUsers.length === 0) {
+      const mockUsers = [
+        { email: "user1@example.com", password: "123456" },
+        { email: "user2@pinkpin.com", password: "pinkpin" }
+      ];
+      localStorage.setItem("users", JSON.stringify(mockUsers));
+      console.log("Mock users đã được thêm vào localStorage.");
+    }
+  }, []);
+
   const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
 
   const handleLogin = () => {
@@ -85,7 +98,7 @@ const GuestPage = () => {
 
   return (
     <div style={styles.wrapper}>
-      <div style={styles.navbar}>
+      <div style={styles.navbar}>        {/*chú thích: Navbar */}
         <div style={styles.logo}>PinkPin</div>
         <div style={styles.navItems}>
           <span style={styles.navButton} onClick={scrollToIntroduce}>
