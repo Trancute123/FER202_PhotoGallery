@@ -99,4 +99,71 @@ nav {
   max-height: 90%;
   border-radius: 10px;
 }
+/* Tạo một lớp để chứa toàn bộ trang Login */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffe3ec, #d8e2dc);
+}
+
+/* Phần form đăng nhập */
+.login-form {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Tiêu đề Login */
+.login-form h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #4a4a4a;
+  font-weight: bold;
+}
+
+/* Input (email và password) */
+.input-field {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.input-field:focus {
+  border-color: #4a90e2;
+}
+
+/* Nút đăng nhập */
+.login-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-button:hover {
+  background-color: #357ab7;
+}
+
+/* Thông báo lỗi */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
 
