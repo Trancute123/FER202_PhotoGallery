@@ -111,7 +111,7 @@ export default function GalleryPage() {
               </span>
 
               <img
-                src="/images/avatar-default.jpg"
+                src="/images/pam.jpg"
                 alt="Avatar"
                 title="Your Account"
                 onClick={() => navigate("/profile")}
