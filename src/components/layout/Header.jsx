@@ -84,7 +84,25 @@ const Header = () => {
         <button onClick={() => dispatch(toggleTheme())} style={buttonStyle}>
           {theme === "light" ? "🌙 Dark" : "☀️ Light"}
         </button>
+
+        <NavLink to="/profile" title="Your Account">
+        <img
+          src="/images/avatar-default.jpg"
+          alt="Avatar"
+          style={{
+            width: "36px",
+            height: "36px",
+            borderRadius: "50%",
+            objectFit: "cover",
+            border: "2px solid white",
+            cursor: "pointer",
+            boxShadow: "0 0 5px rgba(0,0,0,0.15)",
+          }}
+        />
+      </NavLink>
+      
       </div>
+
     </div>
   );
 };
