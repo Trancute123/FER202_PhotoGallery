@@ -2,7 +2,7 @@ const currentUser = {
   id: 1,
   username: "trungtd",
   name: "Tran Duc Trung",
-  avatar: "/images/puppy.jpg",
+  avatar: "/images/pam.jpg",
   email: "trungtdde181059@fpt.edu.vn",
   bio: "💡 UI/UX Designer | 📸 Photo Addict | 🌏 Explorer",
   website: "https://github.com/Trancute123/FER202_PhotoGallery",
