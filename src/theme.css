@@ -1,0 +1,13 @@
+body.dark .navButton,
+body.dark .navButtonOutline {
+  background-color: #333 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+body.dark input,
+body.dark select {
+  background-color: #222;
+  color: #fff;
+  border: 1px solid #555;
+}
