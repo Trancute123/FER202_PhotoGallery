@@ -10,6 +10,7 @@ const Header = () => {
 
   const theme = useSelector((state) => state.theme);
   const isGalleryPage = location.pathname === "/gallery";
+  const isProfilePage = location.pathname === "/profile";
 
   const handleLogout = () => {
     localStorage.removeItem("isAuthenticated");
@@ -67,10 +68,13 @@ const Header = () => {
       </NavLink>
 
       <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-        {isGalleryPage && (
+        {isGalleryPage && isProfilePage &&(
           <>
             <NavLink to="/create" style={navStyle}>
               Tạo
+            </NavLink>
+            <NavLink to="/favorites" style={navStyle}>
+              Thích
             </NavLink>
             <NavLink to="/favorites" style={navStyle}>
               Thích
@@ -85,22 +89,6 @@ const Header = () => {
           {theme === "light" ? "🌙 Dark" : "☀️ Light"}
         </button>
 
-        <NavLink to="/profile" title="Your Account">
-        <img
-          src="/images/avatar-default.jpg"
-          alt="Avatar"
-          style={{
-            width: "36px",
-            height: "36px",
-            borderRadius: "50%",
-            objectFit: "cover",
-            border: "2px solid white",
-            cursor: "pointer",
-            boxShadow: "0 0 5px rgba(0,0,0,0.15)",
-          }}
-        />
-      </NavLink>
-      
       </div>
 
     </div>
