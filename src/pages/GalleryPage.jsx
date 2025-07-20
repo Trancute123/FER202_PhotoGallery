@@ -93,21 +93,42 @@ export default function GalleryPage() {
             Favorites
           </span>
           {isAuthenticated && (
-            <span
-              style={{
-                backgroundColor: "transparent",
-                border: `2px solid ${isDark ? "#ffe0e9" : "#d6336c"}`,
-                borderRadius: "999px",
-                padding: "8px 16px",
-                color: isDark ? "#ffe0e9" : "#d6336c",
-                fontWeight: "bold",
-                fontSize: "14px",
-                cursor: "pointer",
-              }}
-              onClick={handleLogout}
-            >
-              Đăng xuất
-            </span>
+            <>
+              <span
+                style={{
+                  backgroundColor: "transparent",
+                  border: `2px solid ${isDark ? "#ffe0e9" : "#d6336c"}`,
+                  borderRadius: "999px",
+                  padding: "8px 16px",
+                  color: isDark ? "#ffe0e9" : "#d6336c",
+                  fontWeight: "bold",
+                  fontSize: "14px",
+                  cursor: "pointer",
+                }}
+                onClick={handleLogout}
+              >
+                Đăng xuất
+              </span>
+
+              <img
+                src="/images/avatar-default.jpg"
+                alt="Avatar"
+                title="Your Account"
+                onClick={() => navigate("/profile")}
+                style={{
+                  width: "36px",
+                  height: "36px",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  border: "2px solid white",
+                  cursor: "pointer",
+                  boxShadow: "0 0 5px rgba(0,0,0,0.15)",
+                  transition: "transform 0.2s",
+                }}
+                onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.1)")}
+                onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
+              />
+            </>
           )}
 
           {/* ✅ Nút chuyển Dark/Light Theme */}
