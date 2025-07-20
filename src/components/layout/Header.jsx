@@ -1,10 +1,14 @@
 import React from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTheme } from "../../redux/slices/themeSlice";
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
 
+  const theme = useSelector((state) => state.theme);
   const isGalleryPage = location.pathname === "/gallery";
 
   const handleLogout = () => {
@@ -23,6 +27,19 @@ const Header = () => {
     backgroundColor: isActive ? "#bb1c5a" : "transparent",
     transition: "all 0.3s ease",
   });
+
+  const buttonStyle = {
+    fontSize: "16px",
+    padding: "8px 16px",
+    borderRadius: "999px",
+    border: "none",
+    backgroundColor: "#fff",
+    color: "#bb1c5a",
+    fontWeight: "bold",
+    cursor: "pointer",
+    boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
+    transition: "0.3s",
+  };
 
   return (
     <div
@@ -49,22 +66,26 @@ const Header = () => {
         PinkPin
       </NavLink>
 
-      {/* Chỉ hiện 3 nút khi ở trang /gallery */}
-      {isGalleryPage && (
-        <div style={{ display: "flex", gap: "12px" }}>
-          <NavLink to="/create" style={navStyle}>
-            Tạo
-          </NavLink>
-          <NavLink to="/favorites" style={navStyle}>
-            Thích
-          </NavLink>
-          <span onClick={handleLogout} style={navStyle}>
-            Đăng xuất
-          </span>
-        </div>
-      )}
+      <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+        {isGalleryPage && (
+          <>
+            <NavLink to="/create" style={navStyle}>
+              Tạo
+            </NavLink>
+            <NavLink to="/favorites" style={navStyle}>
+              Thích
+            </NavLink>
+            <span onClick={handleLogout} style={navStyle}>
+              Đăng xuất
+            </span>
+          </>
+        )}
 
-      <NavLink to="/profile" title="Your Account">
+        <button onClick={() => dispatch(toggleTheme())} style={buttonStyle}>
+          {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+        </button>
+
+        <NavLink to="/profile" title="Your Account">
         <img
           src="/images/avatar-default.jpg"
           alt="Avatar"
@@ -79,6 +100,8 @@ const Header = () => {
           }}
         />
       </NavLink>
+      
+      </div>
 
     </div>
   );
