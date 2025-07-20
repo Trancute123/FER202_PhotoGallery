@@ -153,7 +153,7 @@ const GuestPage = () => {
             padding: "0 5%",
           }}
         >
-          {/* Câu chữ truyền cảm */}
+
           <div style={{ maxWidth: "500px" }}>
             <h1
               style={{
@@ -292,7 +292,7 @@ const GuestPage = () => {
             filter: "brightness(0.5)",
           }}
         >
-          <source src="/videos/nature-video.mp4" type="video/mp4" />
+          <source src="/videos/nature.mp4" type="video/mp4" />
         </video>
 
         {/* Content on top */}
@@ -449,121 +449,121 @@ const GuestPage = () => {
         </div>
       </div>
 
-{/* Cảm hứng Section */}
-<div
-  style={{
-    display: "flex",
-    backgroundColor: "#fff3f6",
-    padding: "80px 60px",
-    alignItems: "center",
-    justifyContent: "center",
-    flexWrap: "wrap",
-    gap: "60px",
-  }}
->
-  {/* Text Content */}
-  <div style={{ flex: "1 1 400px", maxWidth: "500px" }}>
-    <h2
-      style={{
-        fontSize: "44px",
-        color: "#b02e53",
-        fontWeight: "bold",
-        marginBottom: "20px",
-      }}
-    >
-      Lưu giữ khoảnh khắc
-    </h2>
-    <p style={{ fontSize: "20px", color: "#555", marginBottom: "30px" }}>
-      Những khoảnh khắc đáng nhớ không chỉ nên được lưu giữ trong tâm trí – mà
-      còn nên được chia sẻ để lan toả cảm hứng. Tạo một pin, kể câu chuyện
-      của bạn, và cùng PinkPin chạm đến trái tim người khác.
-    </p>
-    <button
-      onClick={() => navigate("/create")}
-      style={{
-        backgroundColor: "#d6336c",
-        color: "#fff",
-        border: "none",
-        borderRadius: "999px",
-        padding: "12px 24px",
-        fontSize: "16px",
-        fontWeight: "bold",
-        cursor: "pointer",
-        boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
-      }}
-    >
-      Tạo ngay
-    </button>
-  </div>
-
-  {/* Grid Layout với ảnh to - nhỏ đan xen */}
-  <div
-    style={{
-      display: "grid",
-      gridTemplateColumns: "repeat(3, 1fr)",
-      gridTemplateRows: "repeat(2, 180px)",
-      gap: "20px",
-      width: "540px", // 3 cột × 180
-      flexShrink: 0,
-    }}
-  >
-    {[
-      { src: "/images/cat-pilot.jpg", title: "Mèo phi công", colSpan: 2 },
-      { src: "/images/puppy.jpg", title: "Cún và hoa", rowSpan: 2 },
-      { src: "/images/mountain.jpg", title: "Núi tuyết" },
-      { src: "/images/switzerland3.jpg", title: "Hồ Thụy Sĩ" },
-      { src: "/images/nature30.jpg", title: "Rừng xanh" },
-      { src: "/images/nature31.jpg", title: "Suối" },
-      { src: "/images/nature32.jpg", title: "Rừng Tuyết" },
-    ].map((img, i) => (
+      {/* Cảm hứng Section */}
       <div
-        key={i}
         style={{
-          position: "relative",
-          borderRadius: "20px",
-          overflow: "hidden",
-          boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
-          gridColumn: img.colSpan ? `span ${img.colSpan}` : undefined,
-          gridRow: img.rowSpan ? `span ${img.rowSpan}` : undefined,
-          cursor: "pointer",
-          transition: "transform 0.3s ease",
+          display: "flex",
+          backgroundColor: "#fff3f6",
+          padding: "80px 60px",
+          alignItems: "center",
+          justifyContent: "center",
+          flexWrap: "wrap",
+          gap: "60px",
         }}
-        onMouseEnter={(e) =>
-          (e.currentTarget.style.transform = "scale(1.05)")
-        }
-        onMouseLeave={(e) =>
-          (e.currentTarget.style.transform = "scale(1)")
-        }
       >
-        <img
-          src={img.src}
-          alt={img.title}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            display: "block",
-          }}
-        />
+        {/* Text Content */}
+        <div style={{ flex: "1 1 400px", maxWidth: "500px" }}>
+          <h2
+            style={{
+              fontSize: "44px",
+              color: "#b02e53",
+              fontWeight: "bold",
+              marginBottom: "20px",
+            }}
+          >
+            Lưu giữ khoảnh khắc
+          </h2>
+          <p style={{ fontSize: "20px", color: "#555", marginBottom: "30px" }}>
+            Những khoảnh khắc đáng nhớ không chỉ nên được lưu giữ trong tâm trí – mà
+            còn nên được chia sẻ để lan toả cảm hứng. Tạo một pin, kể câu chuyện
+            của bạn, và cùng PinkPin chạm đến trái tim người khác.
+          </p>
+          <button
+            onClick={() => navigate("/create")}
+            style={{
+              backgroundColor: "#d6336c",
+              color: "#fff",
+              border: "none",
+              borderRadius: "999px",
+              padding: "12px 24px",
+              fontSize: "16px",
+              fontWeight: "bold",
+              cursor: "pointer",
+              boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+            }}
+          >
+            Tạo ngay
+          </button>
+        </div>
+
+        {/* Grid Layout với ảnh to - nhỏ đan xen */}
         <div
           style={{
-            position: "absolute",
-            bottom: 0,
-            width: "100%",
-            background:
-              "linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0))",
-            color: "#fff",
-            padding: "8px 12px",
-            fontSize: "14px",
-            fontWeight: "bold",
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gridTemplateRows: "repeat(2, 180px)",
+            gap: "20px",
+            width: "540px", // 3 cột × 180
+            flexShrink: 0,
           }}
         >
-          {img.title}
+          {[
+            { src: "/images/cat-pilot.jpg", title: "Mèo phi công", colSpan: 2 },
+            { src: "/images/puppy.jpg", title: "Cún và hoa", rowSpan: 2 },
+            { src: "/images/mountain.jpg", title: "Núi tuyết" },
+            { src: "/images/switzerland3.jpg", title: "Hồ Thụy Sĩ" },
+            { src: "/images/nature30.jpg", title: "Rừng xanh" },
+            { src: "/images/nature31.jpg", title: "Suối" },
+            { src: "/images/nature32.jpg", title: "Rừng Tuyết" },
+          ].map((img, i) => (
+            <div
+              key={i}
+              style={{
+                position: "relative",
+                borderRadius: "20px",
+                overflow: "hidden",
+                boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+                gridColumn: img.colSpan ? `span ${img.colSpan}` : undefined,
+                gridRow: img.rowSpan ? `span ${img.rowSpan}` : undefined,
+                cursor: "pointer",
+                transition: "transform 0.3s ease",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.transform = "scale(1.05)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.transform = "scale(1)")
+              }
+            >
+              <img
+                src={img.src}
+                alt={img.title}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  display: "block",
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  width: "100%",
+                  background:
+                    "linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0))",
+                  color: "#fff",
+                  padding: "8px 12px",
+                  fontSize: "14px",
+                  fontWeight: "bold",
+                }}
+              >
+                {img.title}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-    ))}
-  </div>
-</div>
 
 
     </div>
