@@ -110,10 +110,10 @@ const GuestPage = () => {
         <div style={styles.logo}>PinkPin</div>
         <div style={styles.navItems}>
           <span style={styles.navButton} onClick={scrollToIntroduce}>
-            Khám phá
+            Explore now
           </span>
           <span style={styles.navButton} onClick={scrollToExplore}>
-            Giới thiệu
+            Inspire
           </span>
           {isAuthenticated ? (
             <span style={styles.navButtonOutline} onClick={handleLogout}>
@@ -122,10 +122,10 @@ const GuestPage = () => {
           ) : (
             <>
               <span style={styles.navButton} onClick={() => navigate("/")}>
-                Đăng nhập
+                Log in
               </span>
               <span style={styles.navButtonOutline} onClick={handleSignup}>
-                Đăng ký
+                Log out
               </span>
             </>
           )}
@@ -153,7 +153,6 @@ const GuestPage = () => {
             padding: "0 5%",
           }}
         >
-
           <div style={{ maxWidth: "500px" }}>
             <h1
               style={{
@@ -165,7 +164,8 @@ const GuestPage = () => {
                 marginBottom: "16px",
               }}
             >
-              Khơi nguồn <br /> ý tưởng
+              Inspire your <br />
+              imagination
             </h1>
             <p
               style={{
@@ -175,8 +175,8 @@ const GuestPage = () => {
                 textShadow: "1px 1px 8px rgba(0,0,0,0.4)",
               }}
             >
-              Nơi những cảm hứng nhỏ bé tạo nên điều phi thường. <br />
-              Lưu lại điều bạn yêu thích. Khám phá điều bạn đam mê.
+              Where tiny moments spark remarkable creations. <br />
+              Capture what moves you. Explore what makes your heart beat.
             </p>
           </div>
 
@@ -195,8 +195,14 @@ const GuestPage = () => {
               zIndex: 10,
             }}
           >
-            <h2 style={{ color: "#d6336c", textAlign: "center", marginBottom: 30 }}>
-              Chào mừng bạn đến với <b>PinkPin</b>
+            <h2
+              style={{
+                color: "#d6336c",
+                textAlign: "center",
+                marginBottom: 30,
+              }}
+            >
+              Nice to meet you at <b>PinkPin!</b>
             </h2>
             <label style={{ fontWeight: "bold", color: "#333" }}>Email</label>
             <input
@@ -213,7 +219,9 @@ const GuestPage = () => {
                 backgroundColor: "#f0f5ff",
               }}
             />
-            <label style={{ fontWeight: "bold", color: "#333" }}>Mật khẩu</label>
+            <label style={{ fontWeight: "bold", color: "#333" }}>
+              Mật khẩu
+            </label>
             <input
               type="password"
               placeholder="Mật khẩu"
@@ -243,7 +251,7 @@ const GuestPage = () => {
                 marginBottom: "12px",
               }}
             >
-              Đăng nhập
+              Log in
             </button>
             <button
               onClick={handleSignup}
@@ -259,12 +267,10 @@ const GuestPage = () => {
                 cursor: "pointer",
               }}
             >
-              Đăng ký
+              Sign up
             </button>
           </div>
         </div>
-
-
       </div>
 
       {/* Giới thiệu section */}
@@ -321,11 +327,13 @@ const GuestPage = () => {
               animation: "typing 3.5s steps(25), blink 0.75s step-end infinite",
             }}
           >
-            Xem, làm, thử, thực hiện
+            See it. Try it. Do it. Create it.
           </h1>
 
           <p style={{ fontSize: "20px", maxWidth: "600px", color: "#eee" }}>
-            Điều tuyệt nhất trên PinkPin là khám phá những nội dung và ý tưởng mới từ mọi người khắp thế giới.
+            Join a global community where inspiration meets action. Explore
+            brilliant content, save what you love, and turn small sparks into
+            big projects.
           </p>
 
           <button
@@ -342,11 +350,10 @@ const GuestPage = () => {
               boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
             }}
           >
-            Khám phá
+            Try it
           </button>
         </div>
       </div>
-
 
       {/* Khám phá section */}
       <div
@@ -372,7 +379,8 @@ const GuestPage = () => {
             width: "220px",
             height: "220px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(255,105,180,0.4), transparent 60%)",
+            background:
+              "radial-gradient(circle, rgba(255,105,180,0.4), transparent 60%)",
             filter: "blur(60px)",
             zIndex: 0,
           }}
@@ -385,7 +393,8 @@ const GuestPage = () => {
             width: "160px",
             height: "160px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(100,150,255,0.3), transparent 60%)",
+            background:
+              "radial-gradient(circle, rgba(100,150,255,0.3), transparent 60%)",
             filter: "blur(50px)",
             zIndex: 0,
           }}
@@ -393,12 +402,48 @@ const GuestPage = () => {
 
         {/* Floating Images */}
         {[
-          { src: "/images/puppy.jpg", top: "60px", left: "60px", rotate: "-6deg", width: "160px" },
-          { src: "/images/mountain.jpg", bottom: "80px", left: "180px", rotate: "4deg", width: "200px" },
-          { src: "/images/switzerland3.jpg", top: "140px", right: "100px", rotate: "-3deg", width: "180px" },
-          { src: "/images/cities11.jpg", bottom: "120px", right: "120px", rotate: "5deg", width: "170px" },
-          { src: "/images/nature45.jpg", top: "200px", left: "300px", rotate: "-5deg", width: "160px" },
-          { src: "/images/nature37.jpg", bottom: "60px", right: "250px", rotate: "6deg", width: "150px" },
+          {
+            src: "/images/puppy.jpg",
+            top: "60px",
+            left: "60px",
+            rotate: "-6deg",
+            width: "160px",
+          },
+          {
+            src: "/images/mountain.jpg",
+            bottom: "80px",
+            left: "180px",
+            rotate: "4deg",
+            width: "200px",
+          },
+          {
+            src: "/images/switzerland3.jpg",
+            top: "140px",
+            right: "100px",
+            rotate: "-3deg",
+            width: "180px",
+          },
+          {
+            src: "/images/cities11.jpg",
+            bottom: "120px",
+            right: "120px",
+            rotate: "5deg",
+            width: "170px",
+          },
+          {
+            src: "/images/nature45.jpg",
+            top: "200px",
+            left: "300px",
+            rotate: "-5deg",
+            width: "160px",
+          },
+          {
+            src: "/images/nature37.jpg",
+            bottom: "60px",
+            right: "250px",
+            rotate: "6deg",
+            width: "150px",
+          },
         ].map((img, idx) => (
           <div
             key={idx}
@@ -406,7 +451,9 @@ const GuestPage = () => {
               position: "absolute",
               ...img,
               zIndex: 1,
-              animation: `float${(idx % 3) + 1} ${6 + idx}s ease-in-out infinite`,
+              animation: `float${(idx % 3) + 1} ${
+                6 + idx
+              }s ease-in-out infinite`,
             }}
           >
             <img
@@ -425,11 +472,26 @@ const GuestPage = () => {
 
         {/* Text Section */}
         <div style={{ zIndex: 2, maxWidth: "600px", textAlign: "left" }}>
-          <h2 style={{ fontSize: "44px", color: "#b30059", fontWeight: "bold", marginBottom: "20px" }}>
-            Tìm kiếm ý tưởng
+          <h2
+            style={{
+              fontSize: "44px",
+              color: "#b30059",
+              fontWeight: "bold",
+              marginBottom: "20px",
+            }}
+          >
+            Wondering what to try next?
           </h2>
-          <p style={{ fontSize: "20px", color: "#4b2c39", marginBottom: "30px" }}>
-            Bạn muốn thử điều gì tiếp theo? Hãy nghĩ về ý tưởng bạn yêu thích — như "phong cảnh Thụy Sĩ" — và xem bạn tìm thấy gì.
+          <p
+            style={{ fontSize: "20px", color: "#4b2c39", marginBottom: "30px" }}
+          >
+            It could be a stunning landscape, a DIY project you've always
+            dreamed of, or just a little inspiration to start something new.
+            Think about what excites you – like “Swiss landscapes,” “dreamy room
+            decor,” or “handmade gifts” – and let PinkPin guide your way.
+            Thousands of ideas are waiting to be discovered, saved, and turned
+            into something uniquely yours. From a single search, you might just
+            uncover a world of creativity.
           </p>
           <button
             style={{
@@ -444,7 +506,7 @@ const GuestPage = () => {
               boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
             }}
           >
-            Khám phá
+            Start your idea journey
           </button>
         </div>
       </div>
@@ -471,12 +533,13 @@ const GuestPage = () => {
               marginBottom: "20px",
             }}
           >
-            Lưu giữ khoảnh khắc
+            Capture the Moment
           </h2>
           <p style={{ fontSize: "20px", color: "#555", marginBottom: "30px" }}>
-            Những khoảnh khắc đáng nhớ không chỉ nên được lưu giữ trong tâm trí – mà
-            còn nên được chia sẻ để lan toả cảm hứng. Tạo một pin, kể câu chuyện
-            của bạn, và cùng PinkPin chạm đến trái tim người khác.
+            Memorable moments deserve more than just a place in your heart —
+            they’re meant to be shared and to inspire others. Create a pin, tell
+            your story, and let PinkPin help you touch someone else's heart.
+            Because even the smallest memory can spark the greatest connection.
           </p>
           <button
             onClick={() => navigate("/create")}
@@ -492,7 +555,7 @@ const GuestPage = () => {
               boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
             }}
           >
-            Tạo ngay
+            Pin your moment
           </button>
         </div>
 
@@ -564,8 +627,6 @@ const GuestPage = () => {
           ))}
         </div>
       </div>
-
-
     </div>
   );
 };

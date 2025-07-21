@@ -71,14 +71,16 @@ const CreatePage = () => {
               cursor: "pointer",
             }}
           >
-            ← Quay lại Gallery
+            ← Back
           </button>
         </div>
-
         <h2 style={{ color: "#d6336c", marginBottom: "16px" }}>
-          Tải ảnh của bạn lên ✨
+          Share your moments with the world ✨
         </h2>
-
+        Every photo holds a story, a feeling, an inspiration. Pick your favorite
+        image, give it a name, and upload it to PinkPin to keep the memory alive
+        and share it with others. Whether it’s a dreamy landscape, a lovely
+        handmade item, or a simple sunset — every moment matters.
         <input
           type="file"
           accept="image/*"

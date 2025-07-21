@@ -75,7 +75,7 @@ export default function GalleryPage() {
             }}
             onClick={() => navigate("/create")}
           >
-            Tạo
+            Create now
           </span>
           <span
             style={{
@@ -107,7 +107,7 @@ export default function GalleryPage() {
                 }}
                 onClick={handleLogout}
               >
-                Đăng xuất
+                Log out
               </span>
 
               <img
@@ -125,8 +125,12 @@ export default function GalleryPage() {
                   boxShadow: "0 0 5px rgba(0,0,0,0.15)",
                   transition: "transform 0.2s",
                 }}
-                onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.1)")}
-                onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
+                onMouseOver={(e) =>
+                  (e.currentTarget.style.transform = "scale(1.1)")
+                }
+                onMouseOut={(e) =>
+                  (e.currentTarget.style.transform = "scale(1)")
+                }
               />
             </>
           )}
