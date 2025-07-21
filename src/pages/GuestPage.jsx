@@ -117,7 +117,7 @@ const GuestPage = () => {
           </span>
           {isAuthenticated ? (
             <span style={styles.navButtonOutline} onClick={handleLogout}>
-              Đăng xuất
+              Sign up
             </span>
           ) : (
             <>

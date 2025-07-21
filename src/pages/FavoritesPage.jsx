@@ -32,7 +32,7 @@ export default function FavoritesPage() {
             marginBottom: "20px",
           }}
         >
-          ← Quay lại Gallery
+          ← Back
         </button>
         <button
           onClick={() => dispatch(toggleTheme())}
@@ -54,7 +54,7 @@ export default function FavoritesPage() {
 
       {favorites.length === 0 ? (
         <p style={{ padding: "20px", textAlign: "center" }}>
-          Bạn chưa thích ảnh nào.
+          Looks like you haven’t liked any photos yet.
         </p>
       ) : (
         <Gallery images={favorites} />
