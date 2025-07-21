@@ -1,71 +1,106 @@
 import React, { useState } from "react";
+import { FaUserFriends, FaTrashAlt, FaSearch } from "react-icons/fa";
 import followersData from "../../data/followers";
-import BackToProfileButton from "../../components/profile/BackToProfileButton";
 
-const FollowersList = () => {
+export default function FollowersList() {
   const [followers, setFollowers] = useState(followersData);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+
   const followersPerPage = 6;
 
-  const totalPages = Math.ceil(followers.length / followersPerPage);
+  const filteredFollowers = followers.filter((f) =>
+    f.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    f.username.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const totalPages = Math.ceil(filteredFollowers.length / followersPerPage);
   const indexOfLast = currentPage * followersPerPage;
   const indexOfFirst = indexOfLast - followersPerPage;
-  const currentFollowers = followers.slice(indexOfFirst, indexOfLast);
-
-  const handlePageChange = (pageNum) => {
-    if (pageNum > 0 && pageNum <= totalPages) {
-      setCurrentPage(pageNum);
-    }
-  };
+  const currentFollowers = filteredFollowers.slice(indexOfFirst, indexOfLast);
 
   const handleRemove = (id) => {
-    const confirmDelete = window.confirm("Bạn có chắc chắn muốn xóa follower này?");
-    if (confirmDelete) {
+    if (window.confirm("Bạn có chắc chắn muốn xóa follower này?")) {
       setFollowers((prev) => prev.filter((f) => f.id !== id));
     }
   };
 
-  return (
-    <div>
-      <BackToProfileButton />
-      <h4 className="mb-4">👥 Danh sách Follower</h4>
+  const handlePageChange = (page) => {
+    if (page > 0 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
 
+  return (
+    <div className="p-4">
+      {/* Tiêu đề */}
+      <h3 className="fw-bold text-primary mb-3 d-flex align-items-center gap-2">
+        <FaUserFriends /> Danh sách Follower
+      </h3>
+
+      {/* Tìm kiếm */}
+      <div className="mb-4 d-flex align-items-center gap-2">
+        <FaSearch className="text-muted" />
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Tìm kiếm theo tên hoặc username..."
+          value={searchTerm}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            setCurrentPage(1); // reset về trang 1
+          }}
+          style={{ maxWidth: "400px" }}
+        />
+      </div>
+
+      {/* Danh sách follower */}
       {currentFollowers.length === 0 ? (
-        <p className="text-muted">Không còn follower nào ở trang này.</p>
+        <p className="text-muted">Không tìm thấy follower nào.</p>
       ) : (
-        currentFollowers.map((follower) => (
-          <div
-            key={follower.id}
-            className="d-flex align-items-center justify-content-between mb-3 p-2 border rounded shadow-sm"
-          >
-            <div className="d-flex align-items-center">
-              <img
-                src={follower.avatar}
-                alt={follower.name}
-                className="rounded-circle me-3"
-                style={{ width: 50, height: 50, objectFit: "cover" }}
-              />
-              <div>
-                <h6 className="mb-0">{follower.name}</h6>
-                {follower.username && (
-                  <small className="text-muted">@{follower.username}</small>
-                )}
-              </div>
-            </div>
-            <button
-              className="btn btn-outline-danger btn-sm"
-              onClick={() => handleRemove(follower.id)}
+        <div className="d-flex flex-column gap-3">
+          {currentFollowers.map((follower) => (
+            <div
+              key={follower.id}
+              className="d-flex align-items-center justify-content-between p-3 rounded shadow-sm"
+              style={{
+                backgroundColor: "#fff",
+                border: "1px solid #eee",
+              }}
             >
-              Xóa
-            </button>
-          </div>
-        ))
+              <div className="d-flex align-items-center gap-3">
+                <img
+                  src={follower.avatar}
+                  alt={follower.name}
+                  className="rounded-circle"
+                  style={{
+                    width: "52px",
+                    height: "52px",
+                    objectFit: "cover",
+                    border: "2px solid #ccc",
+                    boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+                  }}
+                />
+                <div>
+                  <div className="fw-semibold">{follower.name}</div>
+                  <small className="text-muted">@{follower.username}</small>
+                </div>
+              </div>
+              <button
+                className="btn btn-outline-danger btn-sm d-flex align-items-center gap-1"
+                onClick={() => handleRemove(follower.id)}
+              >
+                <FaTrashAlt size={14} /> Xóa
+              </button>
+            </div>
+          ))}
+        </div>
       )}
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <nav>
-          <ul className="pagination justify-content-center mt-4">
+        <nav className="mt-4">
+          <ul className="pagination justify-content-center">
             <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
               <button className="page-link" onClick={() => handlePageChange(currentPage - 1)}>
                 ←
@@ -91,6 +126,4 @@ const FollowersList = () => {
       )}
     </div>
   );
-};
-
-export default FollowersList;
+}
