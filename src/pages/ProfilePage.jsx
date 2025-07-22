@@ -3,23 +3,19 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toggleTheme } from "../redux/slices/themeSlice";
 import currentUser from "../utils/currentUser";
-
 import {
-  FaGlobe,
   FaMapMarkerAlt,
   FaUserFriends,
   FaRetweet,
-  FaCalendarAlt,
 } from "react-icons/fa";
 
 export default function ProfilePage() {
-  //  const userImages = useSelector((state) => state.favorite);
   const theme = useSelector((state) => state.theme);
   const isDark = theme === "dark";
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
-  const [activeTab, setActiveTab] = useState("saved"); // hoặc "created"
+  const [activeTab, setActiveTab] = useState("saved");
 
   const handleLogout = () => {
     localStorage.removeItem("isAuthenticated");
@@ -153,7 +149,7 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* Profile Section */}
+      {/* Profile Info */}
       <div
         style={{
           background: "linear-gradient(to bottom, #ffe0ec, #fce4ec)",
@@ -166,14 +162,11 @@ export default function ProfilePage() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            justifyContent: "center",
             textAlign: "center",
             maxWidth: "700px",
             margin: "0 auto",
-            padding: "40px 20px",
           }}
         >
-          {/* Avatar */}
           <img
             src={currentUser.avatar}
             alt="Avatar"
@@ -188,14 +181,13 @@ export default function ProfilePage() {
             }}
           />
 
-          {/* Name + username */}
           <h2 style={{ fontWeight: "700", fontSize: "28px", marginBottom: "4px" }}>
             {currentUser.name}
           </h2>
           <p style={{ color: "#555", fontSize: "16px", marginBottom: "12px" }}>
             @{currentUser.username}
           </p>
-          {/* Follow stats */}
+
           <div
             style={{
               display: "flex",
@@ -216,37 +208,26 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          {/* Bio */}
           <p style={{ fontSize: "16px", marginBottom: "16px", color: "#333" }}>
             {currentUser.bio}
           </p>
 
-          {/* Website + Location + Join Date */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "8px", fontSize: "15px", color: "#444", marginTop: "12px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", justifyContent: "center" }}>
-              <FaGlobe />
-              <a
-                href={currentUser.website}
-                target="_blank"
-                rel="noreferrer"
-                style={{ color: "#d6336c", fontWeight: 500, textDecoration: "none" }}
-              >
-                {currentUser.website}
-              </a>
-            </div>
-
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", justifyContent: "center" }}>
-              <FaMapMarkerAlt />
-              <span>{currentUser.location}</span>
-            </div>
-
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", justifyContent: "center" }}>
-              <FaCalendarAlt />
-              <span>{currentUser.joinDate}</span>
-            </div>
+          {/* Location only */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              justifyContent: "center",
+              fontSize: "15px",
+              color: "#444",
+              marginTop: "12px",
+            }}
+          >
+            <FaMapMarkerAlt />
+            <span>{currentUser.location}</span>
           </div>
 
-          {/* Settings Button */}
           <button
             onClick={() => navigate("/settings")}
             style={{
@@ -269,13 +250,12 @@ export default function ProfilePage() {
               e.currentTarget.style.color = "#d6336c";
             }}
           >
-            ⚙️ Cài đặt tài khoản
+            Cài đặt tài khoản
           </button>
         </div>
 
-
-        {/* Tab buttons */}
-        <div style={{ textAlign: "center", marginBottom: "20px" }}>
+        {/* Tabs */}
+        <div style={{ textAlign: "center", marginTop: "32px" }}>
           <button
             onClick={() => setActiveTab("saved")}
             style={{
@@ -307,30 +287,35 @@ export default function ProfilePage() {
           </button>
         </div>
 
-        {/* Tab content */}
+        {/* Image Grid */}
         <div
           style={{
-            columnCount: 5,
-            columnGap: "16px",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+            gap: "16px",
             maxWidth: "1200px",
-            margin: "0 auto",
+            margin: "40px auto 0",
+            padding: "0 20px",
           }}
         >
           {(activeTab === "saved" ? savedImages : createdImages).map((src, idx) => (
-            <img
-              key={idx}
-              src={src}
-              alt={`Ảnh ${idx + 1}`}
-              style={{
-                width: "100%",
-                borderRadius: "12px",
-                marginBottom: "16px",
-                breakInside: "avoid",
-              }}
-            />
+            <div key={idx} style={{ width: "100%", aspectRatio: "1/1", overflow: "hidden" }}>
+              <img
+                src={src}
+                alt={`Ảnh ${idx + 1}`}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  borderRadius: "12px",
+                  transition: "transform 0.3s",
+                }}
+                onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
+                onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
+              />
+            </div>
           ))}
         </div>
-
       </div>
     </>
   );
