@@ -4,24 +4,40 @@ import { addImage } from "../redux/slices/imageSlice";
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { GoogleGenAI, Modality } from "@google/genai";
 import "react-toastify/dist/ReactToastify.css";
 
 const CreatePage = () => {
-  const [file, setFile] = useState(null);
-  const [name, setName] = useState("");
-  const [category, setCategory] = useState("User Upload");
-  const [isDark, setIsDark] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [file, setFile] = useState(null);
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("User Upload");
+  const [aiPrompt, setAiPrompt] = useState("");
+  const [aiResponse, setAiResponse] = useState("");
+  const [isDark, setIsDark] = useState(false);
+
+  const ai = new GoogleGenAI({
+    apiKey: "AIzaSyC3u3WOCCtNkcwB9hEq9pVD_VmEfnr35W0",
+  });
+
   useEffect(() => {
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    setIsDark(prefersDark);
+    setIsDark(window.matchMedia("(prefers-color-scheme: dark)").matches);
   }, []);
 
+  const themeStyles = {
+    bg: isDark ? "#1e1e1e" : "#ffffff",
+    text: isDark ? "#eee" : "#333",
+    card: isDark ? "#2a2a2a" : "#fff",
+    border: isDark ? "#444" : "#ddd",
+    button: "#ff69b4",
+  };
+
   const handleChange = (e) => {
-    setFile(e.target.files[0]);
-    setName(e.target.files[0]?.name.replace(/\.[^/.]+$/, "") || "");
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+    setName(selectedFile?.name.replace(/\.[^/.]+$/, "") || "");
   };
 
   const handleUpload = () => {
@@ -31,7 +47,7 @@ const CreatePage = () => {
       const newImage = {
         id: uuidv4(),
         url: reader.result,
-        name: name || file.name.replace(/\.[^/.]+$/, ""),
+        name: name,
         category: category,
         liked: false,
         rating: 0,
@@ -45,12 +61,42 @@ const CreatePage = () => {
     reader.readAsDataURL(file);
   };
 
-  const themeStyles = {
-    bg: isDark ? "#1e1e1e" : "#ffffff",
-    text: isDark ? "#eee" : "#333",
-    card: isDark ? "#2a2a2a" : "#fff",
-    border: isDark ? "#444" : "#ddd",
-    button: "#ff69b4",
+  const handleAiChat = async () => {
+    if (!aiPrompt.trim()) return;
+    try {
+      const response = await ai.models.generateContent({
+        model: "gemini-2.0-flash-preview-image-generation",
+        contents: [{ role: "user", parts: [{ text: aiPrompt }] }],
+        config: {
+          responseModalities: [Modality.TEXT, Modality.IMAGE],
+        },
+      });
+
+      for (const part of response.candidates[0].content.parts) {
+        if (part.text) {
+          setAiResponse(part.text);
+        } else if (part.inlineData) {
+          const imageData = part.inlineData.data;
+          const imageUrl = "data:image/png;base64," + imageData;
+          setAiResponse(
+  <img
+    src={imageUrl}
+    alt="AI generated"
+    style={{
+      marginTop: "12px",
+      maxWidth: "100%",
+      borderRadius: "12px",
+      boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+    }}
+  />
+);
+
+        }
+      }
+      setAiPrompt("");
+    } catch (err) {
+      toast.error("❌ Lỗi AI: " + err.message);
+    }
   };
 
   return (
@@ -59,18 +105,17 @@ const CreatePage = () => {
         backgroundColor: themeStyles.bg,
         color: themeStyles.text,
         minHeight: "100vh",
-        fontFamily: `"Inter", system-ui, sans-serif`,
+        fontFamily: "Inter, sans-serif",
       }}
     >
-      {/* Toast Container */}
-      <ToastContainer position="top-center" autoClose={2500} hideProgressBar />
+      <ToastContainer position="top-center" autoClose={2000} hideProgressBar />
 
       {/* Header */}
       <header
         style={{
           backgroundColor: themeStyles.card,
           padding: "16px 32px",
-          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
@@ -80,88 +125,53 @@ const CreatePage = () => {
         }}
       >
         <h1
-          style={{
-            fontSize: "20px",
-            fontWeight: "700",
-            color: "#d6336c",
-            margin: 0,
-            cursor: "pointer",
-          }}
           onClick={() => navigate("/")}
+          style={{ fontSize: "20px", fontWeight: "700", color: "#d6336c", cursor: "pointer", margin: 0 }}
         >
-          PinkPin 
+          PinkPin
         </h1>
         <button
           onClick={() => navigate("/gallery")}
           style={{
             backgroundColor: themeStyles.button,
-            border: "none",
             color: "#fff",
-            padding: "8px 16px",
+            border: "none",
             borderRadius: "999px",
+            padding: "8px 16px",
             fontWeight: "600",
-            cursor: "pointer",
             fontSize: "14px",
+            cursor: "pointer",
           }}
         >
-          Go to Gallery
+          Xem Gallery
         </button>
       </header>
 
-      {/* Form Upload */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          padding: "40px 20px",
-        }}
-      >
+      {/* Form */}
+      <div style={{ maxWidth: 800, margin: "40px auto", padding: "0 20px" }}>
         <div
           style={{
             background: themeStyles.card,
-            color: themeStyles.text,
-            borderRadius: "24px",
             padding: "32px",
-            boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
-            width: "100%",
-            maxWidth: "500px",
-            textAlign: "center",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+            borderRadius: "0px",
           }}
         >
-          <h2
-            style={{
-              color: "#d6336c",
-              marginBottom: "16px",
-              fontWeight: 700,
-              fontSize: "22px",
-            }}
-          >
-            Share your moments with the world ✨
+          <h2 style={{ color: "#d6336c", marginBottom: "20px", fontWeight: 700 }}>
+            📤 Upload Ảnh của bạn
           </h2>
-          <p
-            style={{
-              marginBottom: "24px",
-              color: isDark ? "#aaa" : "#555",
-              fontSize: "15px",
-              lineHeight: "1.6",
-            }}
-          >
-            Upload your favorite image, give it a name and a category, and
-            inspire others on PinkPin.
-          </p>
 
           <input
             type="file"
             accept="image/*"
             onChange={handleChange}
             style={{
-              marginBottom: "12px",
               width: "100%",
               padding: "12px",
               border: `1px solid ${themeStyles.border}`,
-              borderRadius: "12px",
+              backgroundColor: themeStyles.card,
+              marginBottom: "12px",
               fontSize: "14px",
-              backgroundColor: isDark ? "#1e1e1e" : "#fff",
               color: themeStyles.text,
             }}
           />
@@ -172,13 +182,12 @@ const CreatePage = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             style={{
-              marginBottom: "12px",
               width: "100%",
               padding: "12px",
               border: `1px solid ${themeStyles.border}`,
-              borderRadius: "12px",
+              backgroundColor: themeStyles.card,
+              marginBottom: "12px",
               fontSize: "14px",
-              backgroundColor: isDark ? "#1e1e1e" : "#fff",
               color: themeStyles.text,
             }}
           />
@@ -187,46 +196,85 @@ const CreatePage = () => {
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             style={{
-              marginBottom: "16px",
               width: "100%",
               padding: "12px",
               border: `1px solid ${themeStyles.border}`,
-              borderRadius: "12px",
+              backgroundColor: themeStyles.card,
+              marginBottom: "16px",
               fontSize: "14px",
-              backgroundColor: isDark ? "#1e1e1e" : "#fff",
               color: themeStyles.text,
             }}
           >
             <option value="User Upload">Ảnh người dùng</option>
             <option value="Nature">Thiên nhiên</option>
-            <option value="Animal">Động vật</option>
             <option value="Art">Nghệ thuật</option>
-            <option value="Food">Ẩm thực</option>
+            <option value="Animal">Động vật</option>
             <option value="Travel">Du lịch</option>
-            <option value="Other">Khác</option>
+            <option value="Food">Ẩm thực</option>
           </select>
 
           <button
             onClick={handleUpload}
             disabled={!file}
             style={{
+              width: "100%",
+              padding: "12px",
               backgroundColor: file ? themeStyles.button : "#ccc",
               color: "#fff",
               border: "none",
               borderRadius: "999px",
-              padding: "12px 24px",
               fontWeight: "600",
-              fontSize: "15px",
               cursor: file ? "pointer" : "not-allowed",
-              width: "100%",
-              boxShadow: file
-                ? "0 4px 14px rgba(255,105,180,0.3)"
-                : "none",
-              transition: "all 0.3s ease",
+              boxShadow: "0 4px 14px rgba(255,105,180,0.3)",
             }}
           >
-            Upload Ảnh
+            Upload
           </button>
+        </div>
+
+        {/* AI Chat */}
+        <div
+          style={{
+            background: isDark ? "#2b2b2b" : "#f8f9fa",
+            marginTop: "32px",
+            padding: "24px",
+            borderRadius: "0px",
+          }}
+        >
+          <h3 style={{ color: "#d6336c", marginBottom: "12px" }}>🤖 Chat AI – Tạo ảnh & nội dung</h3>
+          <input
+            type="text"
+            placeholder="Nhập prompt AI..."
+            value={aiPrompt}
+            onChange={(e) => setAiPrompt(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleAiChat()}
+            style={{
+              width: "100%",
+              padding: "10px",
+              marginBottom: "10px",
+              border: `1px solid ${themeStyles.border}`,
+              backgroundColor: themeStyles.card,
+              color: themeStyles.text,
+            }}
+          />
+          <button
+            onClick={handleAiChat}
+            style={{
+              padding: "10px 20px",
+              backgroundColor: themeStyles.button,
+              border: "none",
+              borderRadius: "6px",
+              color: "#fff",
+              fontWeight: "600",
+              cursor: "pointer",
+            }}
+          >
+            Gửi prompt
+          </button>
+
+          <div style={{ marginTop: "16px", fontStyle: "italic", color: themeStyles.text }}>
+            {aiResponse}
+          </div>
         </div>
       </div>
     </div>
