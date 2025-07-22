@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 const CreatePage = () => {
   const [file, setFile] = useState(null);
   const [name, setName] = useState("");
+  const [category, setCategory] = useState("User Upload");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,13 +24,14 @@ const CreatePage = () => {
         id: uuidv4(),
         url: reader.result,
         name: name || file.name.replace(/\.[^/.]+$/, ""),
-        category: "User Upload",
+        category: category,
         liked: false,
         rating: 0,
       };
       dispatch(addImage(newImage));
       setFile(null);
       setName("");
+      setCategory("User Upload");
       alert("Tải ảnh thành công 🎉");
     };
     reader.readAsDataURL(file);
@@ -74,13 +76,18 @@ const CreatePage = () => {
             ← Back
           </button>
         </div>
+
         <h2 style={{ color: "#d6336c", marginBottom: "16px" }}>
           Share your moments with the world ✨
         </h2>
-        Every photo holds a story, a feeling, an inspiration. Pick your favorite
-        image, give it a name, and upload it to PinkPin to keep the memory alive
-        and share it with others. Whether it’s a dreamy landscape, a lovely
-        handmade item, or a simple sunset — every moment matters.
+        <p style={{ marginBottom: "24px" }}>
+          Every photo holds a story, a feeling, an inspiration. Pick your
+          favorite image, give it a name, and upload it to PinkPin to keep the
+          memory alive and share it with others. Whether it’s a dreamy
+          landscape, a lovely handmade item, or a simple sunset — every moment
+          matters.
+        </p>
+
         <input
           type="file"
           accept="image/*"
@@ -93,11 +100,24 @@ const CreatePage = () => {
             borderRadius: "12px",
           }}
         />
+
         <input
           type="text"
           placeholder="Tên ảnh"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          style={{
+            marginBottom: "12px",
+            width: "100%",
+            padding: "10px",
+            border: "1px solid #ccc",
+            borderRadius: "12px",
+          }}
+        />
+
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
           style={{
             marginBottom: "16px",
             width: "100%",
@@ -105,7 +125,16 @@ const CreatePage = () => {
             border: "1px solid #ccc",
             borderRadius: "12px",
           }}
-        />
+        >
+          <option value="User Upload">Ảnh người dùng</option>
+          <option value="Nature">Thiên nhiên</option>
+          <option value="Animal">Động vật</option>
+          <option value="Art">Nghệ thuật</option>
+          <option value="Food">Ẩm thực</option>
+          <option value="Travel">Du lịch</option>
+          <option value="Other">Khác</option>
+        </select>
+
         <button
           onClick={handleUpload}
           disabled={!file}

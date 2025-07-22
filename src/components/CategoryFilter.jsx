@@ -22,10 +22,13 @@ export default function CategoryFilter() {
         display: "block",
       }}
     >
-      <option value="All">All</option>
-      <option value="Animals">Animals</option>
-      <option value="Nature">Nature</option>
-      <option value="Cities">Cities</option>
+      <option value="User Upload">Ảnh người dùng</option>
+          <option value="Nature">Thiên nhiên</option>
+          <option value="Animal">Động vật</option>
+          <option value="Art">Nghệ thuật</option>
+          <option value="Food">Ẩm thực</option>
+          <option value="Travel">Du lịch</option>
+          <option value="Other">Khác</option>
     </select>
   );
 }
