@@ -7,8 +7,8 @@ const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
-
   const theme = useSelector((state) => state.theme);
+
   const isGalleryPage = location.pathname === "/gallery";
   const isProfilePage = location.pathname === "/profile";
 
@@ -18,79 +18,106 @@ const Header = () => {
     navigate("/");
   };
 
-  const navStyle = ({ isActive }) => ({
-    color: isActive ? "#fff" : "#f0f0f0",
+  const navButton = {
+    padding: "8px 18px",
+    fontSize: "14px",
     fontWeight: "bold",
-    textDecoration: "none",
-    fontSize: "16px",
-    padding: "8px 16px",
-    borderRadius: "999px",
-    backgroundColor: isActive ? "#bb1c5a" : "transparent",
-    transition: "all 0.3s ease",
-  });
-
-  const buttonStyle = {
-    fontSize: "16px",
-    padding: "8px 16px",
     borderRadius: "999px",
     border: "none",
-    backgroundColor: "#fff",
-    color: "#bb1c5a",
-    fontWeight: "bold",
     cursor: "pointer",
-    boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
-    transition: "0.3s",
+    transition: "all 0.3s ease",
   };
 
   return (
     <div
       style={{
-        background: "linear-gradient(to right, #FF512F, #DD2476)",
-        padding: "12px 24px",
+        backgroundColor: "#fff",
+        padding: "12px 32px",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        borderBottom: "4px solid #bb1c5a",
-        borderRadius: "0 0 15px 15px",
-        boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+        borderBottom: "1px solid #eee",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+        fontFamily: "'Segoe UI', sans-serif",
       }}
     >
+      {/* Logo */}
       <NavLink
         to="/"
         style={{
           fontSize: "22px",
           fontWeight: "bold",
-          color: "#fff",
+          color: "#d72660",
           textDecoration: "none",
         }}
       >
         PinkPin
       </NavLink>
 
+      {/* Navigation Buttons */}
       <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-        {isGalleryPage && isProfilePage &&(
+        {(isGalleryPage || isProfilePage) && (
           <>
-            <NavLink to="/create" style={navStyle}>
-              Tạo
+            <NavLink
+              to="/create"
+              style={{
+                ...navButton,
+                backgroundColor: "#ff69b4",
+                color: "#fff",
+              }}
+            >
+              Create now
             </NavLink>
-            <NavLink to="/favorites" style={navStyle}>
-              Thích
+
+            <NavLink
+              to="/favorites"
+              style={{
+                ...navButton,
+                backgroundColor: "#ff69b4",
+                color: "#fff",
+              }}
+            >
+              Favorites
             </NavLink>
-            <NavLink to="/favorites" style={navStyle}>
-              Thích
-            </NavLink>
-            <span onClick={handleLogout} style={navStyle}>
-              Đăng xuất
-            </span>
+
+            <button
+              onClick={handleLogout}
+              style={{
+                ...navButton,
+                backgroundColor: "#fff",
+                color: "#ff69b4",
+                border: "2px solid #ff69b4",
+              }}
+            >
+              Log out
+            </button>
+
+            {/* Avatar */}
+            <img
+              src="https://i.pravatar.cc/36"
+              alt="avatar"
+              style={{
+                width: "36px",
+                height: "36px",
+                borderRadius: "50%",
+                objectFit: "cover",
+              }}
+            />
           </>
         )}
 
-        <button onClick={() => dispatch(toggleTheme())} style={buttonStyle}>
+        {/* Theme Toggle */}
+        <button
+          onClick={() => dispatch(toggleTheme())}
+          style={{
+            ...navButton,
+            backgroundColor: theme === "light" ? "#222" : "#fff",
+            color: theme === "light" ? "#fff" : "#222",
+          }}
+        >
           {theme === "light" ? "🌙 Dark" : "☀️ Light"}
         </button>
-
       </div>
-
     </div>
   );
 };

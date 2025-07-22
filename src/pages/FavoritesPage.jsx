@@ -12,7 +12,7 @@ export default function FavoritesPage() {
 
   const backgroundColor =
     theme === "light"
-      ? "linear-gradient(to right, #ffe0e9, #fdf1f5)"
+      ? "linear-gradient(to right, #ffffffff, #ffffffff)"
       : "linear-gradient(to right, #121212, #1e1e1e)";
   const textColor = theme === "light" ? "#111" : "#f9f9f9";
 
