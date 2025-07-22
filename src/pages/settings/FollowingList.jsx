@@ -21,7 +21,9 @@ export default function FollowingList() {
   const currentItems = filteredFollowing.slice(indexOfFirst, indexOfLast);
 
   const handleUnfollow = (id) => {
-    const confirmUnfollow = window.confirm("Bạn có chắc chắn muốn bỏ theo dõi người này?");
+    const confirmUnfollow = window.confirm(
+      "Are you sure you want to unfollow this user?"
+    );
     if (confirmUnfollow) {
       setFollowing((prev) => prev.filter((user) => user.id !== id));
     }
@@ -35,30 +37,33 @@ export default function FollowingList() {
 
   return (
     <div className="p-4">
-      {/* Tiêu đề */}
-      <h3 className="fw-bold text-primary mb-3 d-flex align-items-center gap-2">
-        <FaUserCheck /> Danh sách Following
+      {/* Title */}
+      <h3
+        className="fw-bold mb-3 d-flex align-items-center gap-2"
+        style={{ color: "#d6336c" }}
+      >
+        <FaUserCheck /> Following List
       </h3>
 
-      {/* Thanh tìm kiếm */}
+      {/* Search bar */}
       <div className="mb-4 d-flex align-items-center gap-2">
-        <FaSearch className="text-muted" />
+        <FaSearch style={{ color: "#d6336c" }} />
         <input
           type="text"
           className="form-control"
-          placeholder="Tìm theo tên hoặc username..."
+          placeholder="Search by name or username..."
           value={searchTerm}
           onChange={(e) => {
             setSearchTerm(e.target.value);
-            setCurrentPage(1); // reset về trang đầu
+            setCurrentPage(1); // reset to first page
           }}
           style={{ maxWidth: "400px" }}
         />
       </div>
 
-      {/* Danh sách following */}
+      {/* Following list */}
       {currentItems.length === 0 ? (
-        <p className="text-muted">Không tìm thấy người dùng nào phù hợp.</p>
+        <p className="text-muted">No matching users found.</p>
       ) : (
         <div className="d-flex flex-column gap-3">
           {currentItems.map((user) => (
@@ -89,10 +94,16 @@ export default function FollowingList() {
                 </div>
               </div>
               <button
-                className="btn btn-outline-danger btn-sm d-flex align-items-center gap-1"
+                className="btn btn-sm d-flex align-items-center gap-1"
+                style={{
+                  border: "1px solid #d6336c",
+                  color: "#d6336c",
+                  fontWeight: "500",
+                  backgroundColor: "white",
+                }}
                 onClick={() => handleUnfollow(user.id)}
               >
-                <FaUserMinus size={14} /> Bỏ theo dõi
+                <FaUserMinus size={14} /> Unfollow
               </button>
             </div>
           ))}
@@ -104,7 +115,11 @@ export default function FollowingList() {
         <nav className="mt-4">
           <ul className="pagination justify-content-center">
             <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
-              <button className="page-link" onClick={() => handlePageChange(currentPage - 1)}>
+              <button
+                className="page-link"
+                style={{ color: "#d6336c", borderColor: "#d6336c" }}
+                onClick={() => handlePageChange(currentPage - 1)}
+              >
                 ←
               </button>
             </li>
@@ -113,13 +128,30 @@ export default function FollowingList() {
                 key={i}
                 className={`page-item ${currentPage === i + 1 ? "active" : ""}`}
               >
-                <button className="page-link" onClick={() => handlePageChange(i + 1)}>
+                <button
+                  className="page-link"
+                  style={{
+                    color: "#d6336c",
+                    backgroundColor:
+                      currentPage === i + 1 ? "#ffe0e9" : "white",
+                    borderColor: "#d6336c",
+                  }}
+                  onClick={() => handlePageChange(i + 1)}
+                >
                   {i + 1}
                 </button>
               </li>
             ))}
-            <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
-              <button className="page-link" onClick={() => handlePageChange(currentPage + 1)}>
+            <li
+              className={`page-item ${
+                currentPage === totalPages ? "disabled" : ""
+              }`}
+            >
+              <button
+                className="page-link"
+                style={{ color: "#d6336c", borderColor: "#d6336c" }}
+                onClick={() => handlePageChange(currentPage + 1)}
+              >
                 →
               </button>
             </li>

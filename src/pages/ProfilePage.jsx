@@ -3,11 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toggleTheme } from "../redux/slices/themeSlice";
 import currentUser from "../utils/currentUser";
-import {
-  FaMapMarkerAlt,
-  FaUserFriends,
-  FaRetweet,
-} from "react-icons/fa";
+import { FaMapMarkerAlt, FaUserFriends, FaRetweet } from "react-icons/fa";
 
 export default function ProfilePage() {
   const theme = useSelector((state) => state.theme);
@@ -102,7 +98,7 @@ export default function ProfilePage() {
                   cursor: "pointer",
                 }}
               >
-                Đăng xuất
+                Log out
               </span>
 
               <img
@@ -149,53 +145,70 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* Profile Info */}
+      {/* Profile Info Section */}
       <div
         style={{
-          background: "linear-gradient(to bottom, #ffe0ec, #fce4ec)",
-          padding: "40px 20px",
+          background: "linear-gradient(to bottom, #ffdce5, #fff0f5)",
+          padding: "80px 20px 40px",
           minHeight: "100vh",
         }}
       >
         <div
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
             maxWidth: "700px",
             margin: "0 auto",
+            background: "#fff",
+            borderRadius: "24px",
+            padding: "60px 24px 40px",
+            boxShadow: "0 20px 40px rgba(255, 105, 180, 0.15)",
+            position: "relative",
+            textAlign: "center",
           }}
         >
           <img
             src={currentUser.avatar}
             alt="Avatar"
             style={{
-              width: "140px",
-              height: "140px",
-              borderRadius: "50%",
+              width: "220px",
+              height: "220px",
+              borderRadius: "80%",
               objectFit: "cover",
-              border: "4px solid white",
-              boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
-              marginBottom: "16px",
+              border: "5px solid white",
+              boxShadow: "0 12px 25px rgba(0, 0, 0, 0.15)",
+              position: "absolute",
+              top: "-75px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              backgroundColor: "#fff",
             }}
           />
 
-          <h2 style={{ fontWeight: "700", fontSize: "28px", marginBottom: "4px" }}>
+          <h2
+            style={{ fontWeight: "800", fontSize: "30px", marginTop: "90px" }}
+          >
             {currentUser.name}
           </h2>
-          <p style={{ color: "#555", fontSize: "16px", marginBottom: "12px" }}>
+          <p style={{ color: "#888", marginBottom: "8px" }}>
             @{currentUser.username}
+          </p>
+
+          <p style={{ fontSize: "15px", marginBottom: "20px", color: "#555" }}>
+            {currentUser.bio}
+          </p>
+
+          <p style={{ color: "#777", fontSize: "14px", marginBottom: "16px" }}>
+            <FaMapMarkerAlt style={{ marginRight: "6px" }} />
+            {currentUser.location}
           </p>
 
           <div
             style={{
               display: "flex",
-              gap: "32px",
               justifyContent: "center",
-              marginBottom: "12px",
+              gap: "32px",
               fontSize: "15px",
               color: "#444",
+              marginBottom: "24px",
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
@@ -208,49 +221,22 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          <p style={{ fontSize: "16px", marginBottom: "16px", color: "#333" }}>
-            {currentUser.bio}
-          </p>
-
-          {/* Location only */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-              justifyContent: "center",
-              fontSize: "15px",
-              color: "#444",
-              marginTop: "12px",
-            }}
-          >
-            <FaMapMarkerAlt />
-            <span>{currentUser.location}</span>
-          </div>
-
           <button
             onClick={() => navigate("/settings")}
             style={{
-              marginTop: "24px",
+              background: "linear-gradient(to right, #ff758c, #ff7eb3)",
+              color: "#fff",
+              border: "none",
               padding: "10px 24px",
-              border: "2px solid #d6336c",
-              borderRadius: "999px",
-              backgroundColor: "#fff0f5",
-              color: "#d6336c",
+              fontSize: "15px",
               fontWeight: "600",
+              borderRadius: "999px",
               cursor: "pointer",
+              boxShadow: "0 4px 10px rgba(255,105,180,0.3)",
               transition: "all 0.3s ease",
             }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.backgroundColor = "#d6336c";
-              e.currentTarget.style.color = "#fff";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.backgroundColor = "#fff0f5";
-              e.currentTarget.style.color = "#d6336c";
-            }}
           >
-            Cài đặt tài khoản
+            Account Settings
           </button>
         </div>
 
@@ -269,7 +255,7 @@ export default function ProfilePage() {
               cursor: "pointer",
             }}
           >
-            Ảnh đã lưu
+            Saved Images
           </button>
           <button
             onClick={() => setActiveTab("created")}
@@ -283,11 +269,11 @@ export default function ProfilePage() {
               cursor: "pointer",
             }}
           >
-            Ảnh đã tạo
+            Created Images
           </button>
         </div>
 
-        {/* Image Grid */}
+        {/* Gallery */}
         <div
           style={{
             display: "grid",
@@ -298,23 +284,36 @@ export default function ProfilePage() {
             padding: "0 20px",
           }}
         >
-          {(activeTab === "saved" ? savedImages : createdImages).map((src, idx) => (
-            <div key={idx} style={{ width: "100%", aspectRatio: "1/1", overflow: "hidden" }}>
-              <img
-                src={src}
-                alt={`Ảnh ${idx + 1}`}
+          {(activeTab === "saved" ? savedImages : createdImages).map(
+            (src, idx) => (
+              <div
+                key={idx}
                 style={{
                   width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  borderRadius: "12px",
-                  transition: "transform 0.3s",
+                  aspectRatio: "1/1",
+                  overflow: "hidden",
                 }}
-                onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
-                onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
-              />
-            </div>
-          ))}
+              >
+                <img
+                  src={src}
+                  alt={`Ảnh ${idx + 1}`}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    borderRadius: "12px",
+                    transition: "transform 0.3s",
+                  }}
+                  onMouseOver={(e) =>
+                    (e.currentTarget.style.transform = "scale(1.05)")
+                  }
+                  onMouseOut={(e) =>
+                    (e.currentTarget.style.transform = "scale(1)")
+                  }
+                />
+              </div>
+            )
+          )}
         </div>
       </div>
     </>

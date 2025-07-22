@@ -21,14 +21,18 @@ export default function AccountSettings() {
   const isDark = theme === "dark";
 
   const navItems = [
-    { to: "edit-profile", label: "Chỉnh sửa Hồ sơ", icon: <FaUserEdit /> },
-    { to: "account-manager", label: "Quản lý tài khoản", icon: <FaUserShield /> },
-    { to: "followers", label: "Danh sách follower", icon: <FaUsers /> },
-    { to: "following", label: "Danh sách following", icon: <FaUserFriends /> },
-    { to: "blocked", label: "Tài khoản bị chặn", icon: <FaUserSlash /> },
+    { to: "edit-profile", label: "Edit Profile", icon: <FaUserEdit /> },
+    {
+      to: "account-manager",
+      label: "Account Management",
+      icon: <FaUserShield />,
+    },
+    { to: "followers", label: "Followers", icon: <FaUsers /> },
+    { to: "following", label: "Following", icon: <FaUserFriends /> },
+    { to: "blocked", label: "Blocked Accounts", icon: <FaUserSlash /> },
   ];
 
-  // Breadcrumb tự động
+  // Automatically detect page title
   const pageTitle = navItems.find((item) =>
     location.pathname.includes(item.to)
   )?.label;
@@ -52,7 +56,7 @@ export default function AccountSettings() {
           color: isDark ? "#fff" : "#000",
         }}
       >
-        {/* Avatar mini */}
+        {/* Mini Avatar */}
         <div className="d-flex align-items-center mb-4">
           <img
             src="/images/avatar-default.jpg"
@@ -61,18 +65,21 @@ export default function AccountSettings() {
             style={{ width: 40, height: 40, objectFit: "cover" }}
           />
           <div>
-            <strong>Xin chào, Trung!</strong>
+            <strong>Hello, Trung!</strong>
             <br />
             <small className="text-muted">@trung0709</small>
           </div>
         </div>
 
         {/* Section Title */}
-        <h5 className="mb-3 text-primary d-flex align-items-center gap-2">
-          <FaCog /> Cài đặt tài khoản
+        <h5
+          className="mb-3 d-flex align-items-center gap-2"
+          style={{ color: "#ffb6c1", fontWeight: "600" }}
+        >
+          <FaCog /> Account Settings
         </h5>
 
-        {/* Nav Items */}
+        {/* Navigation Items */}
         <div className="list-group">
           {navItems.map((item) => (
             <NavLink
@@ -96,7 +103,7 @@ export default function AccountSettings() {
           to="/profile"
           className="btn btn-outline-secondary mt-4 w-100 d-flex align-items-center justify-content-center gap-2"
         >
-          <FaArrowLeft /> Quay lại hồ sơ
+          <FaArrowLeft /> Back to Profile
         </NavLink>
 
         {/* Toggle Dark Mode */}
@@ -114,7 +121,7 @@ export default function AccountSettings() {
         </button>
       </div>
 
-      {/* Nội dung bên phải */}
+      {/* Main Content */}
       <div
         className="flex-grow-1 p-4 animate__animated animate__fadeIn"
         style={{

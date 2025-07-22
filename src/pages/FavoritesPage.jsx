@@ -1,13 +1,11 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { toggleTheme } from "../redux/slices/themeSlice";
 import Header from "../components/layout/Header";
 
 export default function FavoritesPage() {
   const favorites = useSelector((state) => state.favorite);
   const theme = useSelector((state) => state.theme);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const backgroundColor =
@@ -50,8 +48,6 @@ export default function FavoritesPage() {
         >
           ← Back
         </button>
-
-        
       </div>
 
       {/* No favorites message */}
@@ -90,13 +86,11 @@ export default function FavoritesPage() {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = "scale(1.05)";
-                e.currentTarget.style.boxShadow =
-                  "0 8px 24px rgba(0,0,0,0.25)";
+                e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.25)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = "scale(1)";
-                e.currentTarget.style.boxShadow =
-                  "0 4px 10px rgba(0,0,0,0.1)";
+                e.currentTarget.style.boxShadow = "0 4px 10px rgba(0,0,0,0.1)";
               }}
             >
               <img

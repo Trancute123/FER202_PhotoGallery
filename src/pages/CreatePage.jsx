@@ -79,18 +79,17 @@ const CreatePage = () => {
           const imageData = part.inlineData.data;
           const imageUrl = "data:image/png;base64," + imageData;
           setAiResponse(
-  <img
-    src={imageUrl}
-    alt="AI generated"
-    style={{
-      marginTop: "12px",
-      maxWidth: "100%",
-      borderRadius: "12px",
-      boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-    }}
-  />
-);
-
+            <img
+              src={imageUrl}
+              alt="AI generated"
+              style={{
+                marginTop: "12px",
+                maxWidth: "100%",
+                borderRadius: "12px",
+                boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+              }}
+            />
+          );
         }
       }
       setAiPrompt("");
@@ -126,7 +125,13 @@ const CreatePage = () => {
       >
         <h1
           onClick={() => navigate("/")}
-          style={{ fontSize: "20px", fontWeight: "700", color: "#d6336c", cursor: "pointer", margin: 0 }}
+          style={{
+            fontSize: "20px",
+            fontWeight: "700",
+            color: "#d6336c",
+            cursor: "pointer",
+            margin: 0,
+          }}
         >
           PinkPin
         </h1>
@@ -143,7 +148,7 @@ const CreatePage = () => {
             cursor: "pointer",
           }}
         >
-          Xem Gallery
+          View Gallery
         </button>
       </header>
 
@@ -157,8 +162,10 @@ const CreatePage = () => {
             borderRadius: "0px",
           }}
         >
-          <h2 style={{ color: "#d6336c", marginBottom: "20px", fontWeight: 700 }}>
-            📤 Upload Ảnh của bạn
+          <h2
+            style={{ color: "#d6336c", marginBottom: "20px", fontWeight: 700 }}
+          >
+            📤 Upload your photo
           </h2>
 
           <input
@@ -205,12 +212,12 @@ const CreatePage = () => {
               color: themeStyles.text,
             }}
           >
-            <option value="User Upload">Ảnh người dùng</option>
-            <option value="Nature">Thiên nhiên</option>
-            <option value="Art">Nghệ thuật</option>
-            <option value="Animal">Động vật</option>
-            <option value="Travel">Du lịch</option>
-            <option value="Food">Ẩm thực</option>
+            <option value="User Upload">User Upload</option>
+            <option value="Nature">Nature</option>
+            <option value="Art">Art</option>
+            <option value="Animal">Animal</option>
+            <option value="Travel">Travel</option>
+            <option value="Food">Food</option>
           </select>
 
           <button
@@ -241,10 +248,12 @@ const CreatePage = () => {
             borderRadius: "0px",
           }}
         >
-          <h3 style={{ color: "#d6336c", marginBottom: "12px" }}>🤖 Chat AI – Tạo ảnh & nội dung</h3>
+          <h3 style={{ color: "#d6336c", marginBottom: "12px" }}>
+            🤖 Chat AI – Create photo & content
+          </h3>
           <input
             type="text"
-            placeholder="Nhập prompt AI..."
+            placeholder="Enter prompt AI..."
             value={aiPrompt}
             onChange={(e) => setAiPrompt(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleAiChat()}
@@ -269,10 +278,16 @@ const CreatePage = () => {
               cursor: "pointer",
             }}
           >
-            Gửi prompt
+            Send prompt
           </button>
 
-          <div style={{ marginTop: "16px", fontStyle: "italic", color: themeStyles.text }}>
+          <div
+            style={{
+              marginTop: "16px",
+              fontStyle: "italic",
+              color: themeStyles.text,
+            }}
+          >
             {aiResponse}
           </div>
         </div>

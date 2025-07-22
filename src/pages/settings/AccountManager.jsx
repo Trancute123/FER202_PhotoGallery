@@ -22,16 +22,16 @@ export default function AccountManager() {
     birthDate: "2001-11-11",
     gender: "other",
     description: "No Shy, I Try",
-    country: "Việt Nam",
-    language: "Tiếng Việt",
+    country: "Vietnam",
+    language: "Vietnamese",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (form.newPassword !== form.confirmPassword) {
-      alert("❌ Mật khẩu xác nhận không khớp.");
+      alert("❌ Confirm password does not match.");
     } else {
-      alert("✅ Đổi mật khẩu thành công (giả lập).");
+      alert("✅ Password updated successfully (simulated).");
     }
   };
 
@@ -42,32 +42,45 @@ export default function AccountManager() {
 
   return (
     <div className="container py-5">
-      {/* Tiêu đề chính */}
-      <h2 className="mb-4 fw-bold text-primary d-flex align-items-center gap-2">
-        <FaUserEdit />
-        <span>Quản lý Tài khoản</span>
+      {/* Main Title */}
+      <h2
+        className="mb-4 fw-bold d-flex align-items-center gap-2"
+        style={{ color: "#d6336c" }}
+      >
+        <FaUserEdit style={{ color: "#d6336c" }} />
+        <span>Account Management</span>
       </h2>
 
+      {/* Email Display */}
       <div className="bg-light p-3 rounded shadow-sm mb-4 d-flex align-items-center gap-3">
-        <FaEnvelope className="text-secondary" />
+        <FaEnvelope style={{ color: "#d6336c" }} />
         <span className="fw-semibold">Email:</span> {currentUser.email}
       </div>
 
+      {/* Toggle Password Change */}
       <div className="mb-4">
         <button
-          className="btn btn-outline-dark d-flex align-items-center gap-2"
+          className="btn d-flex align-items-center gap-2"
+          style={{
+            border: "2px solid #d6336c",
+            color: "#d6336c",
+            borderRadius: "999px",
+            fontWeight: "bold",
+            padding: "6px 14px",
+          }}
           onClick={() => setShowPasswordFields(!showPasswordFields)}
         >
           <FaLock />
-          {showPasswordFields ? "Hủy đổi mật khẩu" : "Đổi mật khẩu"}
+          {showPasswordFields ? "Cancel Password Change" : "Change Password"}
         </button>
       </div>
 
+      {/* Password Form */}
       {showPasswordFields && (
         <form onSubmit={handleSubmit} className="mb-5">
           <div className="row g-3">
             <div className="col-md-4">
-              <label className="form-label">Mật khẩu hiện tại</label>
+              <label className="form-label">Current Password</label>
               <input
                 type="password"
                 className="form-control"
@@ -78,7 +91,7 @@ export default function AccountManager() {
               />
             </div>
             <div className="col-md-4">
-              <label className="form-label">Mật khẩu mới</label>
+              <label className="form-label">New Password</label>
               <input
                 type="password"
                 className="form-control"
@@ -89,7 +102,7 @@ export default function AccountManager() {
               />
             </div>
             <div className="col-md-4">
-              <label className="form-label">Xác nhận mật khẩu mới</label>
+              <label className="form-label">Confirm New Password</label>
               <input
                 type="password"
                 className="form-control"
@@ -100,23 +113,35 @@ export default function AccountManager() {
               />
             </div>
           </div>
-          <button type="submit" className="btn btn-primary mt-3">
-            Cập nhật mật khẩu
+          <button
+            type="submit"
+            className="btn mt-3"
+            style={{
+              backgroundColor: "#ff8fb2",
+              color: "white",
+              fontWeight: "600",
+            }}
+          >
+            Update Password
           </button>
         </form>
       )}
 
-      <h4 className="mb-3 text-info d-flex align-items-center gap-2">
-        <FaUserEdit /> Thông tin cá nhân
+      {/* Profile Info Title */}
+      <h4
+        className="mb-3 d-flex align-items-center gap-2"
+        style={{ color: "#d6336c" }}
+      >
+        <FaUserEdit style={{ color: "#d6336c" }} /> Personal Information
       </h4>
 
+      {/* Profile Info Form */}
       <form>
         <div className="row g-3">
           <div className="col-md-4">
-            {/* Ngày sinh */}
             <label className="form-label d-flex align-items-center gap-2">
-              <FaBirthdayCake className="text-secondary" />
-              <span>Ngày sinh</span>
+              <FaBirthdayCake style={{ color: "#d6336c" }} />
+              <span>Date of Birth</span>
             </label>
             <input
               type="date"
@@ -128,10 +153,9 @@ export default function AccountManager() {
           </div>
 
           <div className="col-md-8">
-            {/* Giới tính */}
             <label className="form-label d-flex align-items-center gap-2">
-              <FaVenusMars className="text-secondary" />
-              <span>Giới tính</span>
+              <FaVenusMars style={{ color: "#d6336c" }} />
+              <span>Gender</span>
             </label>
             <div className="form-check form-check-inline">
               <input
@@ -142,7 +166,7 @@ export default function AccountManager() {
                 checked={profileInfo.gender === "male"}
                 onChange={handleProfileChange}
               />
-              <label className="form-check-label">Nam</label>
+              <label className="form-check-label">Male</label>
             </div>
             <div className="form-check form-check-inline">
               <input
@@ -153,7 +177,7 @@ export default function AccountManager() {
                 checked={profileInfo.gender === "female"}
                 onChange={handleProfileChange}
               />
-              <label className="form-check-label">Nữ</label>
+              <label className="form-check-label">Female</label>
             </div>
             <div className="form-check form-check-inline">
               <input
@@ -164,12 +188,12 @@ export default function AccountManager() {
                 checked={profileInfo.gender === "other"}
                 onChange={handleProfileChange}
               />
-              <label className="form-check-label">Khác</label>
+              <label className="form-check-label">Other</label>
             </div>
           </div>
 
           <div className="col-12">
-            <label className="form-label">Giới thiệu</label>
+            <label className="form-label">About Me</label>
             <textarea
               className="form-control"
               name="description"
@@ -179,15 +203,14 @@ export default function AccountManager() {
               onChange={handleProfileChange}
             />
             <small className="text-muted">
-              {profileInfo.description.length}/500 ký tự
+              {profileInfo.description.length}/500 characters
             </small>
           </div>
 
           <div className="col-md-6">
-            {/* Quốc gia */}
             <label className="form-label d-flex align-items-center gap-2">
-              <FaGlobeAsia className="text-secondary" />
-              <span>Quốc gia / Khu vực</span>
+              <FaGlobeAsia style={{ color: "#d6336c" }} />
+              <span>Country / Region</span>
             </label>
             <select
               className="form-select"
@@ -195,18 +218,17 @@ export default function AccountManager() {
               value={profileInfo.country}
               onChange={handleProfileChange}
             >
-              <option>Việt Nam</option>
-              <option>Hoa Kỳ</option>
-              <option>Nhật Bản</option>
-              <option>Hàn Quốc</option>
+              <option>Vietnam</option>
+              <option>USA</option>
+              <option>Japan</option>
+              <option>Korea</option>
             </select>
           </div>
 
           <div className="col-md-6">
-            {/* Ngôn ngữ */}
             <label className="form-label d-flex align-items-center gap-2">
-              <FaLanguage className="text-secondary" />
-              <span>Ngôn ngữ</span>
+              <FaLanguage style={{ color: "#d6336c" }} />
+              <span>Language</span>
             </label>
             <select
               className="form-select"
@@ -214,7 +236,7 @@ export default function AccountManager() {
               value={profileInfo.language}
               onChange={handleProfileChange}
             >
-              <option>Tiếng Việt</option>
+              <option>Vietnamese</option>
               <option>English</option>
               <option>日本語</option>
               <option>한국어</option>
@@ -223,8 +245,20 @@ export default function AccountManager() {
         </div>
 
         <div className="text-end mt-4">
-          <button type="button" className="btn btn-success px-4">
-            💾 Lưu thay đổi
+          <button
+            type="button"
+            style={{
+              backgroundColor: "#d6336c",
+              color: "white",
+              border: "none",
+              padding: "10px 24px",
+              borderRadius: "12px",
+              fontWeight: "600",
+              boxShadow: "0 4px 8px rgba(214, 51, 108, 0.2)",
+              transition: "all 0.3s ease",
+            }}
+          >
+            💾 Save Changes
           </button>
         </div>
       </form>

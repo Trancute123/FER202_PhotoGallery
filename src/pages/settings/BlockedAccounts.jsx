@@ -11,21 +11,23 @@ export default function BlockedAccounts() {
   const [blockedUsers, setBlockedUsers] = useState(initialBlockedUsers);
 
   const handleUnblock = (user) => {
-    const confirmUnblock = window.confirm(`Bạn có chắc muốn bỏ chặn ${user.name}?`);
+    const confirmUnblock = window.confirm(
+      `Are you sure you want to unblock ${user.name}?`
+    );
     if (confirmUnblock) {
       setBlockedUsers((prev) => prev.filter((u) => u.id !== user.id));
-      alert(`✅ Đã bỏ chặn ${user.name} (giả lập)`);
+      alert(`✅ ${user.name} has been unblocked (mocked).`);
     }
   };
 
   return (
     <div className="p-4">
       <h3 className="fw-bold text-danger mb-3 d-flex align-items-center gap-2">
-        <FaBan /> Tài khoản bị chặn
+        <FaBan /> Blocked Accounts
       </h3>
 
       {blockedUsers.length === 0 ? (
-        <p className="text-muted">Không có tài khoản nào bị chặn.</p>
+        <p className="text-muted">There are no blocked accounts.</p>
       ) : (
         <div className="d-flex flex-column gap-3">
           {blockedUsers.map((user) => (
@@ -58,7 +60,7 @@ export default function BlockedAccounts() {
                 className="btn btn-outline-danger btn-sm d-flex align-items-center gap-1"
                 onClick={() => handleUnblock(user)}
               >
-                <FaUnlock size={14} /> Bỏ chặn
+                <FaUnlock size={14} /> Unblock
               </button>
             </div>
           ))}

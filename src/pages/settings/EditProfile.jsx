@@ -14,23 +14,22 @@ export default function EditProfile() {
   const handleSave = (e) => {
     e.preventDefault();
     Object.assign(currentUser, formData);
-    alert("✅ Hồ sơ đã được cập nhật!");
+    alert("✅ Profile updated successfully!");
   };
 
   const fileInputRef = useRef();
 
-const handleAvatarChange = (e) => {
-  const file = e.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      // Cập nhật ảnh mới (nếu bạn muốn lưu tạm vào formData hoặc currentUser)
-      currentUser.avatar = reader.result;
-      setFormData((prev) => ({ ...prev })); // để re-render lại
-    };
-    reader.readAsDataURL(file);
-  }
-};
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        currentUser.avatar = reader.result;
+        setFormData((prev) => ({ ...prev }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <div
@@ -44,65 +43,71 @@ const handleAvatarChange = (e) => {
       <h3
         style={{
           fontWeight: "700",
-          color: "#2b7de9",
+          color: "#ff8fb2",
           marginBottom: "24px",
           textAlign: "center",
+          letterSpacing: "0.3px",
         }}
       >
-        ✏️ Chỉnh sửa Hồ sơ
+        ✏️ Edit Profile
       </h3>
 
-{/* Avatar + Change button */}
-<div style={{ display: "flex", justifyContent: "center", position: "relative", marginBottom: "30px" }}>
-  <div style={{ position: "relative" }}>
-    <img
-      src={currentUser.avatar}
-      alt="Avatar"
-      style={{
-        width: "120px",
-        height: "120px",
-        borderRadius: "50%",
-        objectFit: "cover",
-        border: "4px solid white",
-        boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-      }}
-    />
+      {/* Avatar + Change button */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          position: "relative",
+          marginBottom: "30px",
+        }}
+      >
+        <div style={{ position: "relative" }}>
+          <img
+            src={currentUser.avatar}
+            alt="Avatar"
+            style={{
+              width: "120px",
+              height: "120px",
+              borderRadius: "50%",
+              objectFit: "cover",
+              border: "4px solid white",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+            }}
+          />
 
-    <input
-      type="file"
-      accept="image/*"
-      ref={fileInputRef}
-      style={{ display: "none" }}
-      onChange={handleAvatarChange}
-    />
+          <input
+            type="file"
+            accept="image/*"
+            ref={fileInputRef}
+            style={{ display: "none" }}
+            onChange={handleAvatarChange}
+          />
 
-    <button
-      title="Đổi ảnh đại diện"
-      onClick={() => fileInputRef.current.click()}
-      style={{
-        position: "absolute",
-        bottom: "-8px",
-        right: "-8px",
-        background: "#333",
-        border: "none",
-        color: "#fff",
-        borderRadius: "50%",
-        padding: "6px 8px",
-        cursor: "pointer",
-        boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
-      }}
-    >
-      <FaCamera />
-    </button>
-  </div>
-</div>
-
-
+          <button
+            title="Change avatar"
+            onClick={() => fileInputRef.current.click()}
+            style={{
+              position: "absolute",
+              bottom: "-8px",
+              right: "-8px",
+              background: "#333",
+              border: "none",
+              color: "#fff",
+              borderRadius: "50%",
+              padding: "6px 8px",
+              cursor: "pointer",
+              boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
+            }}
+          >
+            <FaCamera />
+          </button>
+        </div>
+      </div>
 
       {/* Form fields */}
       <form onSubmit={handleSave}>
         <div className="mb-3">
-          <label className="form-label fw-semibold">Tên hiển thị</label>
+          <label className="form-label fw-semibold">Display Name</label>
           <input
             type="text"
             className="form-control"
@@ -111,16 +116,18 @@ const handleAvatarChange = (e) => {
           />
         </div>
         <div className="mb-3">
-          <label className="form-label fw-semibold">Tên người dùng</label>
+          <label className="form-label fw-semibold">Username</label>
           <input
             type="text"
             className="form-control"
             value={formData.username}
-            onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, username: e.target.value })
+            }
           />
         </div>
         <div className="mb-3">
-          <label className="form-label fw-semibold">Tiểu sử</label>
+          <label className="form-label fw-semibold">Bio</label>
           <textarea
             className="form-control"
             rows={2}
@@ -134,22 +141,26 @@ const handleAvatarChange = (e) => {
             type="text"
             className="form-control"
             value={formData.website}
-            onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, website: e.target.value })
+            }
           />
         </div>
         <div className="mb-4">
-          <label className="form-label fw-semibold">Địa điểm</label>
+          <label className="form-label fw-semibold">Location</label>
           <input
             type="text"
             className="form-control"
             value={formData.location}
-            onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, location: e.target.value })
+            }
           />
         </div>
 
         <div style={{ textAlign: "right" }}>
           <button type="submit" className="btn btn-success px-4">
-            💾 Lưu thay đổi
+            💾 Save Changes
           </button>
         </div>
       </form>
